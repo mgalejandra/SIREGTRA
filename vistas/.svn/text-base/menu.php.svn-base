@@ -1,0 +1,35 @@
+<?php
+if ($_SESSION['tipoUsuario'] == 1 )require('menuAdministrador.php'); //listo
+if ($_SESSION['tipoUsuario'] == 2 )require('menuAdministradorSuvinca.php'); //listo
+if ($_SESSION['tipoUsuario'] == 3 )require('menuAnalista.php');//listo
+if ($_SESSION['tipoUsuario'] == 4 )require('menuCoordinador.php');//listo
+if ($_SESSION['tipoUsuario'] == 5 )require('menuDirector.php');//listo
+if ($_SESSION['tipoUsuario'] == 6 )require('menuPresidente.php');//listo
+if ($_SESSION['tipoUsuario'] == 7 )require('menuMinisterio.php');//listo
+if ($_SESSION['tipoUsuario'] == 8 )require('menuAdministradorBanco.php'); //listo
+if ($_SESSION['tipoUsuario'] == 9 )require('menuAnalistaBanco.php'); //listo
+if ($_SESSION['tipoUsuario'] == 10 )require('menuGerenteBanco.php'); //listo
+if ($_SESSION['tipoUsuario'] == 11 )require('menuAnalistaComercializacion.php');
+if ($_SESSION['tipoUsuario'] == 12 )require('menuAnalistaAdmin.php');//listo
+if ($_SESSION['tipoUsuario'] == 13 )require('menuAnalistaAtenPubl.php');//listo
+if ($_SESSION['tipoUsuario'] == 14 )require('menuAnalistaAtenPubl2.php');//listo
+if ($_SESSION['tipoUsuario'] == 15) require('menuAsitPrephp.php');//listo
+if ($_SESSION['tipoUsuario'] == 16) require('menuAdminCitas.php');//listo
+if ($_SESSION['tipoUsuario'] == 17) require('menuAnalistaAtenPublComp.php');//listo
+if ($_SESSION['tipoUsuario'] == 18) require('menuRegistroyControl.php');//listo
+if ($_SESSION['tipoUsuario'] == 19) require('menuConcesionario.php');//listo
+if ($_SESSION['tipoUsuario'] == 20) require('menuDirectorConcesionario.php');//listo
+if ($_SESSION['tipoUsuario'] == 21) require('menutxt.php');//listo
+if ($_SESSION['tipoUsuario'] == 22) require('menuConsultoria.php');//listo
+if ($_SESSION['tipoUsuario'] == 23) require('menuCoordinadorCampo.php');//listo
+if ($_SESSION['tipoUsuario'] == 24) require('menuAnalistaComercializacion2.php');//listo
+if ($_SESSION['tipoUsuario'] == 25) require('menuPresidencia.php');//listo
+if ($_SESSION['tipoUsuario'] == 26) require('menuAnalistaCobranza.php');//listo
+?>
+<link rel="stylesheet" href="../css/stilos.css" type="text/css">
+<table align="right">
+<tr>
+	<td class="categoria"><?php echo 'Usuario: '; ?></td>
+	<td class="dato"><?php echo $_SESSION['usuario']; ?></td>
+</tr>
+</table>

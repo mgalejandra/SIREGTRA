@@ -1,0 +1,202 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+padding: 5px;
+}
+
+/*^'^ Navigation Structure ^'^*/
+.nav-container-outer{
+    /*Borde redondeado*/
+-webkit-border-radius:6px;/*Chrome y Safari*/
+-moz-border-radius:6px;/*Firefox*/
+-o-border-radius:6px;/*Opera*/
+border-radius:6px;/*Estandar*/
+background: #990000;
+padding: 0px;
+height: 28px;
+width:1146px;
+background:url(nav-bg.png);
+/*Color degradado*/
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#FF0404), to(#5B0000));/*Chrome y Safari*/
+    background-image: -moz-linear-gradient(top center,#FF0404, #5B0000);/*Firefox*/
+    background-image: -o-linear-gradient(top,#FF0404, #5B0000);/*Opera*/
+    background-image: linear-gradient(top, #FF0404, #5B0000);/*Estandar*/
+}
+.float-left{
+float: left;
+}
+.float-right{
+float: right;
+}
+.nav-container .divider{
+display:block;
+font-size:1px;
+border-width:0px;
+border-style:solid;
+}
+.nav-container .divider-vert{
+float:left;
+width:0px;
+display: none;
+}
+.nav-container .item-secondary-title{
+display:block;
+cursor:default;
+white-space:nowrap;
+}
+.clear{
+font-size:1px;
+height:0px;
+width:0px;
+clear:left;
+line-height:0px;
+display:block;
+float:none;
+}
+.nav-container{
+position:relative;
+margin: 0 auto;
+}
+.nav-container a, .nav-container li{
+    /*Borde redondeado*/
+-webkit-border-radius:6px;/*Chrome y Safari*/
+ -moz-border-radius:6px;/*Firefox*/
+ -o-border-radius:6px;/*Opera*/
+ border-radius:6px;/*Estandar*/
+float:left;
+display:block;
+white-space:nowrap;
+text-align:left;
+}
+.nav-container div a, .nav-container ul a, .nav-container ul li{
+float:none;
+}
+.nav-container ul{
+left:-10000px;
+position:absolute;
+}
+.nav-container, .nav-container ul{
+list-style:none;
+padding:0px;
+margin:0px;
+}
+.nav-container li a{
+float:none;
+}
+.nav-container li{
+position:relative;
+}
+.nav-container ul{
+z-index:10;
+}
+.nav-container ul ul{
+z-index:20;
+}
+.nav-container ul ul ul{
+z-index:30;
+}
+.nav-container ul ul ul ul{
+z-index:40;
+}
+.nav-container ul ul ul ul ul{
+z-index:50;
+}
+li:hover>ul{
+left:auto;
+}
+#nav-container ul {
+top:100%;
+}
+#nav-container ul li:hover>ul{
+top:0px;
+left:100%;
+}
+
+/*^'^ Primary Items ^'^*/
+#nav-container a{
+padding:0px 10px 0px 10px;
+margin: 4px 0px 0px 0px;
+color: #FFFFFF;
+font-family: Helvetica;
+font-size:15px;
+text-decoration:none;
+    /*Borde redondeado*/
+-webkit-border-radius:6px;/*Chrome y Safari*/
+ -moz-border-radius:6px;/*Firefox*/
+ -o-border-radius:6px;/*Opera*/
+ border-radius:6px;/*Estandar*/
+background-repeat: no-repeat;
+background-position: top;
+}
+
+#nav-container a:hover{
+    /*Borde redondeado*/
+-webkit-border-radius:6px;/*Chrome y Safari*/
+ -moz-border-radius:6px;/*Firefox*/
+ -o-border-radius:6px;/*Opera*/
+ border-radius:6px;/*Estandar*/
+color:#7F1111;
+background: url(item-secondary-bg.png);
+background-position: center;
+}
+
+/*^'^ Secondary Items Container ^'^*/
+#nav-container div, #nav-container ul{
+padding:0px 0px 0px 0px;
+margin:0px 0px 0px 0px;
+/*
+background: url(item-secondary-container-bg.jpg);
+background-repeat: repeat-x;
+
+background-color: #EEEEEE;
+*/
+}
+
+/*^'^ Secondary Items ^'^*/
+#nav-container div a, #nav-container ul a{
+/*
+padding:0px 0px 3px 6px;
+background-position: 0px 22px;
+*/
+background: url(nav-bg.png);
+font-size:13px;
+border-width:0px;
+border-style:none;
+margin: 0px 0px 0px 0px;
+
+height: 24px;
+}
+
+/*^'^ Secondary Items Hover State ^'^*/
+#nav-container div a:hover, #nav-container ul a:hover{
+background: url(item-secondary-bg.png);
+color:#7F1111;
+}
+
+/*^'^ Secondary Item Titles ^'^*/
+#nav-container .item-secondary-title{
+cursor:default;
+padding:0px 0px 3px 0px;
+color: #6C3600;
+font-family:Helvetica;
+font-size:11px;
+/* background: url(images/item-secondary-title-bg.jpg); */
+background-repeat: no-repeat;
+font-weight:bold;
+}
+
+/*^'^ Horizontal Dividers ^'^*/
+#nav-container .divider-horiz{
+border-top-width:1px;
+margin:5px 5px;
+border-color: #C16100;
+}
+
+/*^'^ Vertical Dividers ^'^*/
+#nav-container .divider-vert{
+border-left-width:1px;
+height:15px;
+margin:4px 2px 0px 2px;
+border-color:#AAAAAA;
+}

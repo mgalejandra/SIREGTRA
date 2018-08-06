@@ -1,0 +1,31 @@
+
+<link href="imagenes/style.css" rel="stylesheet" type="text/css" />
+<div class="nav-container-outer">
+   <ul id="nav-container" class="nav-container">
+    <li><a class="item-primary" href="listado_factura_acto.php">Listado Acto</a>
+    </li>
+    <li><a class="item-primary" href="#">Txt</a>
+		<ul style="width: 190px;">
+			<li><a href="reg_txt_veh.php">Vehículo</a></li>
+			<li><a href="reg_txt_pro.php">Beneficiarios</a></li>
+			<li><a href="reg_txt_pla.php">Placas</a></li>
+			<li><a href="reg_autorizacion.php">Autorización para el INTTT</a></li>
+			<li><a href="listado_enviosVeh.php">Consultar Estatus Envío</a></li>
+			<li><a href="regSta_enviosVeh.php">Registro Status de Envio</a></li>
+			<li><a href="Sta_enviosVeh.php">Listado Status de Envio</a></li>
+			<li><a href="regSta_enviosVehDet.php">Registro Status de Envio Det.</a>
+			</li>
+			<li><a href="regSta_enviosVehElim.php">Enviar Eliminados al Intt</a>
+			</li>
+			<li><a href="consulta_VehINTT.php">Consultar INTT</a></li>
+		</ul>
+	</li>
+	 <li><span class="divider divider-vert" ></span></li>
+    <li><a class="item-primary" href="entrega_auto.php">Entrega</a>
+	 <li><span class="divider divider-vert" ></span></li>
+    <li><a class="item-primary" href="nueva_clave.php">Clave</a>
+      <li><span class="divider divider-vert" ></span></li>
+     <li><a class="item-primary" href="cierra_sesion.php">Salir</a></li>
+     <li class="clear">&nbsp;</li>
+   </ul>
+</div>

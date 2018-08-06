@@ -1,0 +1,6 @@
+{
+    "require": {
+        "robmorgan/phinx": "*",
+        "guzzlehttp/guzzle": "~5.0"
+    }
+}

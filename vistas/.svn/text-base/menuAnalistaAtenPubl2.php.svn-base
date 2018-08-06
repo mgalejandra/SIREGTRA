@@ -1,0 +1,35 @@
+
+<link href="imagenes/style.css" rel="stylesheet" type="text/css" />
+<div class="nav-container-outer">
+   <ul id="nav-container" class="nav-container">
+
+    <li><a class="item-primary" href="#">Beneficiarios</a>
+      <ul style="width:170px;">
+       <li><a href="reg_beneficiariosExp.php">Registro</a></li>
+       <li><a href="listado_beneficiariosExp.php">Listado</a></li>
+     </ul>
+    </li>
+    <li><a class="item-primary" href="#">Citas</a>
+      <ul style="width:170px;">
+       <li><a href="listado_citas.php">Listado Citas</a></li>
+     </ul>
+    </li>
+     <li><a class="item-primary" href="#">Estatus Credito</a>
+      <ul style="width:170px;">
+       <li><a href="reg_estatusCredito.php">Registro</a></li>
+       <li><a href="listado_estatusCredito.php">Listado</a></li>
+     </ul>
+    </li>
+     <li><span class="divider divider-vert" ></span></li>
+      <li><a class="item-primary" href="#">Reportes</a>
+        <ul style="width:190px;">
+        <li><a href="listado_facturasOriginales.php">Listado Facturas Originales</a></li>
+    </ul>
+    </li>
+      <li><span class="divider divider-vert" ></span></li>
+    <li><a class="item-primary" href="nueva_clave.php">Cambio de Clave</a>
+      <li><span class="divider divider-vert" ></span></li>
+     <li><a class="item-primary" href="cierra_sesion.php">Salir</a></li>
+     <li class="clear">&nbsp;</li>
+   </ul>
+</div>

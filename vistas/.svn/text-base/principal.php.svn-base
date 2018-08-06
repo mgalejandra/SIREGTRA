@@ -1,0 +1,82 @@
+<?php
+session_start();
+require('../modelos/conexion.php');
+require('../controlador/funciones.php');
+$host = $_SERVER["HTTP_HOST"];
+$aux = explode('/',$_SERVER["REQUEST_URI"]);
+$uri='';
+for ($i=0;$i<count($aux);$i++)$uri = $uri.$aux[$i]."/";
+$dir='http://'.$host.$uri;
+$permitidos = array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26);
+validaAcceso($permitidos,$dir);
+?>
+<!DOCTYPE HTML PUBLIC >
+<html>
+  <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <link rel="stylesheet" href="../css/stilos.css" type="text/css">
+  <script type="text/javascript" src="../controlador/funciones.js"></script>
+  <script type="text/javascript" src="../controlador/calendario.js"></script>
+
+  </head>
+  <body class="pagina">
+  <TABLE class="completo">
+	<TR>
+     <TD class="banner"></TD>
+    </TR>
+    <TR>
+     <TD >
+      <DIV class="menu">
+       <?php include("menu.php") ?>
+      </DIV>
+     </TD>
+    </TR>
+    <TR>
+     <TD class="cuerpo">
+      <DIV class="nivel1">
+       <DIV class="nivel2">
+<!--  Contenido Principal         -->
+<table class="completo3">
+  <tbody>
+    <tr>
+      <td class="titulo2">
+      Registro Nacional de Empresas Fabricantes, Ensambladoras, Carroceras e Importadoras de Veh&iacute;culos (REFECIV)
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="completo3">
+  <tbody>
+    <tr>
+      <td colspan="2" valign="top" class="detallesB"> <div align="justify">
+        <p> <li> Consiste en llevar un registro de toda empresa relacionada con la fabricaci&oacute;n, ensamblaje, carrozado, importaci&oacute;n y modificaci&oacute;n estructural de veh&iacute;culos terrestres.          </p>
+        <p> <li> Forma parte de los requisitos previos a cumplir para la Firma del Convenio de Cooperaci&oacute;n Institucional para Asignaci&oacute;n de Placas y Certificados de Origen.          </p>
+        <p> <li> Conocer de forma previa a la comercializaci&oacute;n, los veh&iacute;culos que ser&aacute;n ofrecidos al mercado nacional.          </p>
+        <p> <li>No es Autorizaci&oacute;n para Comercializaci&oacute;n de Veh&iacute;culos, y/u Homologaci&oacute;n de Prototipos.</p>
+        <p align="center"><a class="vinculo" href="imagenes/aviso_refeciv2008.pdf" target="_blank">Ver Aviso Oficial</a> </p>
+      </div></td>
+    </tr>
+    </tbody>
+</table>
+	   <table width="75%"  border="2"  class="completo2">
+       <p class="titulo2"></p>
+           <span style="text-align:center ">	
+      
+            <div align="center"><img src="imagenes/sirecov.png"  border="2" />
+      <br>
+      <br>
+      	     	  </tr>
+      </table>
+<!--  FIN Contenido Principal         -->
+       </DIV>
+      </DIV>
+     </TD>
+    </TR>
+    <TR>
+     <TD class="piedepagina">
+      <?php include("piedepagina.php") ?>
+     </TD>
+    </TR>
+   </TABLE>
+  </body>
+</html>

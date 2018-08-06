@@ -1,0 +1,54 @@
+<link href="imagenes/style.css" rel="stylesheet" type="text/css" />
+<div class="nav-container-outer">
+   <ul id="nav-container" class="nav-container">
+    <li><a class="item-primary" href="principal.php">Principal</a>
+
+    </li>
+     <li>
+     <a class="item-primary" href="#">Factura Proforma</a>
+      <ul style="width:170px;">
+       <li>
+       <a href="listado_factura_banco.php">Buscar Factura</a>
+      </li>
+       <li>
+       <a href="listado_factura_acto.php">Listado Acto</a>
+      </li>
+     </ul>
+    </li>
+     <li><a class="item-primary" href="#">Reportes</a>
+      <ul style="width:200px;">
+       <li><a href="listado_veh_ent_marcaB.php">Vehiculos Ent x Marca...</a></li>
+       <li><a href="cuadroResumenBancoVehB.php">Vehiculos Marca x Estatus...</a></li>
+       <li><a href="cuadroResumenBancoVehMoviProfB.php">Movimientos Proformas...</a></li>
+      </ul>
+    </li>
+      <li><span class="divider divider-vert" ></span></li>
+       <li>
+       <a href="listado_memoExpedienteB.php">Memos Expedientes</a>
+      </li>
+      <li>
+       <a href="listado_memoCertificadosB.php">Memos Certificados</a>
+      </li>
+      <li><a class="item-primary" href="#">Estatus</a>
+      <ul style="width:200px;">
+       <li><a href="reg_estatusCreditoBan.php">Registro de Estatus</a></li>
+       <li><a href="listado_estatusCreditoBan.php">Listado de Estatus Registrados</a></li>
+      </ul>
+     </li>
+           <li>
+       <a href="listado_pagospersonasBan.php">Iniciales Consignadas</a>
+      </li>
+     <!--     <li><a class="item-primary" href="#">Beneficiario</a>
+      <ul style="width:200px;">
+       <li><a href="reg_beneficiariosExpBan.php">Registro Beneficiario</a></li>
+       <li><a href="listado_beneficiariosExpBan.php">Listado de Beneficiario</a></li>
+      </ul>
+     </li>-->
+       <li>
+       <a href="nueva_clave.php">Cambio de Clave</a>
+      </li>
+      <li><span class="divider divider-vert" ></span></li>
+     <li><a class="item-primary" href="cierra_sesion.php">Salir</a></li>
+     <li class="clear">&nbsp;</li>
+   </ul>
+</div>

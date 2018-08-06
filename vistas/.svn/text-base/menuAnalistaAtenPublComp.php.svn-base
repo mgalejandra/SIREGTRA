@@ -1,0 +1,102 @@
+
+<link href="imagenes/style.css" rel="stylesheet" type="text/css" />
+<div class="nav-container-outer">
+   <ul id="nav-container" class="nav-container">
+   <li><a href="reg_placas.php">Registro Placas</a></li>
+    <li><a class="item-primary" href="#">Beneficiarios</a>
+      <ul style="width:170px;">
+       <li><a href="reg_beneficiariosExp.php">Registro Credito</a></li>
+       <li><a href="reg_beneficiarios.php">Registro Contado</a></li>
+       <li><a href="reg_beneficiarios_c.php">Registro Instituciones</a></li>
+       <li><a href="listado_beneficiariosExp.php">Listado</a></li>
+         <!--   <li><a href="reg_beneficiariosExp2.php">Registro</a></li>-->
+         <!--  <li><a href="listado_beneficiariosExp.php">Listado Ben Exp.</a></li>-->
+     <!--  <li><a href="reg_beneficiarios.php">Registro Beneficiarios</a></li>-->
+
+     </ul>
+    </li>
+    <li><a class="item-primary" href="#">Citas</a>
+      <ul style="width:170px;">
+       <li><a href="listado_citas.php">Listado Citas</a></li>
+             <li><a href="listado_beneficiariosCitasSol2.php">Consultar Citas</a></li>
+     </ul>
+    </li>
+    <li><a class="item-primary" href="#">Asignar</a>
+      <ul style="width:170px;">
+       <li><a href="reg_asignacion.php">Asignar Vehiculo</a></li>
+       <li><a href="listado_asignacion.php">Listado Vehiculos Asignados</a></li>
+       <li><a href="preproforma.php">Asignar Vehiculo PreInv</a></li>
+	   <li><a href="listado_preproforma.php">Listado Vehiculo PreInv</a></li>
+       </li>
+      </ul>
+    </li>
+     <li><a class="item-primary" href="#">Factura Proforma</a>
+      <ul style="width:200px;">
+       <li><a href="reg_factura.php">Registrar Factura Proforma</a></li>
+       <li><a href="listado_factura.php">Listado</a></li>
+       <li><a href="reg_facturapreinv.php">Registrar Factura PreProf.</a></li>
+       <li><a href="listado_facturaPreInv.php">Listado Facturas Pre-Proformas</a></li>
+      </ul>
+    </li>
+    <li><a class="item-primary" href="#">Varios</a>
+      	<ul style="width:170px;">
+    <!--<li><a class="item-primary" href="#">Reclamos ></a>
+      		<ul style="width:170px;">
+       			<li>
+       			<a href="reg_reclamos.php">Registrar</a>
+      			</li>
+       			<li>
+       			<a href="listado_reclamos.php">Listado</a>
+      			</li>
+     		</ul>
+    	</li>-->
+    		<li><a class="item-secondary" href="#">Pagos&nbsp;&nbsp;&gt;</a>
+	    		<ul style="width:100%;">
+	    		    <li><a href="listado_pago.php">Pagos por Banco Cred.</a></li>
+	     			<li><a href="listado_pagos.php?id_caso=2">Lista de pagos...</a></li>
+	     			<li><a href="reg_pago.php">Registrar pagos Parciales...</a></li>
+	     			<li><a href="listado_pagos_anulados.php?id_caso=2">Listado de pagos Anulados...</a></li>
+	    		</ul>
+    		</li>
+      		<li><a class="item-secondary" href="#">Remision de Cheques&nbsp;&nbsp;&gt;</a>
+	    		<ul style="width:100%;">
+	     			<li><a href="listado_relacion_cheques.php">Lista Remisión de cheques...</a></li>
+	     			<li><a href="encabezado_relacion_cheques.php">Registrar remisión...</a></li>
+	    		</ul>
+    		</li>
+    		<li><a class="item-secondary" href="#">Remision de Expediente ></a>
+	    		<ul style="width:100%;">
+	     			<li><a href="memoExpediente.php">Registrar Remision Exp.</a></li>
+	     			<li><a href="listado_memoExpediente.php">Listado Remision Exp.</a></li>
+	    		</ul>
+    		</li>
+    		<li><a class="item-secondary" href="#">Remision de Certificados > </a>
+	    		<ul style="width:100%;">
+	     			<li><a href="memoCertificados.php">Registrar Remision Cert.</a></li>
+	     			<li><a href="listado_memoCertificados.php">Listado Remision Cert.</a></li>
+	    		</ul>
+    		</li>
+
+     	</ul>
+    </li>
+    <li><a class="item-primary" href="consulta_estatus.php">Estatus Crédito</a>
+     <!--  <ul style="width:170px;">
+    <li><a href="reg_estatusCredito.php">Registro</a></li>
+       <li><a href="listado_estatusCredito.php">Listado</a></li>
+     </ul>
+    </li>-->
+        <li><span class="divider divider-vert" ></span></li>
+      <li><a class="item-primary" href="#">Consulta INTT</a>
+        <ul style="width:190px;">
+	      <li><a href="listado_enviosVeh.php">Consultar Estatus Envío</a></li>
+	      <li><a href="consulta_VehINTT.php">Consultar INTT</a></li>
+	    </ul>
+    </li>
+      <li><span class="divider divider-vert" ></span></li>
+    <li><a class="item-primary" href="nueva_clave.php">Cambio de Clave</a>
+      <li><span class="divider divider-vert" ></span></li>
+
+     <li><a class="item-primary" href="cierra_sesion.php">Salir</a></li>
+     <li class="clear">&nbsp;</li>
+   </ul>
+</div>

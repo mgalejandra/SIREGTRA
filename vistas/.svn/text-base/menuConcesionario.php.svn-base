@@ -1,0 +1,15 @@
+
+<link href="imagenes/style.css" rel="stylesheet" type="text/css" />
+<div class="nav-container-outer">
+   <ul id="nav-container" class="nav-container">
+    <li><a class="item-primary" href="principal.php">Inicio</a></li>
+	<li><span class="divider divider-vert" ></span></li>
+    <li><a class="item-primary" href="listado_concesionario.php">Vehículos SUVINCA</a></li>
+    <li><a href="listado_vehiculos_nopdi.php">Veh. no Aprob. PDI</a></li>
+  <li><span class="divider divider-vert" ></span></li>
+    <li><a class="item-primary" href="nueva_clave.php">Cambio de Clave</a>
+      <li><span class="divider divider-vert" ></span></li>
+     <li><a class="item-primary" href="cierra_sesion.php">Salir</a></li>
+     <li class="clear">&nbsp;</li>
+   </ul>
+</div>

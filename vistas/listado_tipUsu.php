@@ -1,0 +1,232 @@
+<?php
+session_start();
+require('../modelos/conexion.php');
+require('../controlador/funciones.php');
+require('../modelos/usuarios.php');
+
+$host = $_SERVER["HTTP_HOST"];
+	$aux = explode('/',$_SERVER["REQUEST_URI"]);
+	$uri='';
+	for ($i=0;$i<count($aux);$i++)$uri = $uri.$aux[$i]."/";
+	$dir='http://'.$host.$uri;
+    $permitidos = array(1,2);
+	validaAcceso($permitidos,$dir);
+
+$objUsuario = new usuario();
+
+$indBusq = $_POST['indBusq'];
+$descripcion=$_POST['descripcion'];
+$nivel=$_POST['nivel'];
+$pgActual = $_POST['pagina'];
+
+$nroFilas = 15;
+$nroCampos = 4;
+
+if($indBusq==2){
+	$descripcion=null;
+
+
+}
+$contiTem = $objUsuario->contartipUsu('',$descripcion,$nivel);
+$cantPaginas = ceil($contiTem/$nroFilas);
+if(!$pgActual)$pgActual = 1;
+elseif($pgActual > $cantPaginas)$pgActual = $cantPaginas;
+
+if($cantPaginas <= 11){
+	$pgIni = 1;
+	$pgFin = $cantPaginas;
+}
+elseif($cantPaginas > 11 AND $pgActual< 5 ){
+	$pgIni = 1;
+	$pgFin = 11;
+}
+elseif($cantPaginas > ($pgActual+5) AND $pgActual>=5){
+	$pgIni = $pgActual - 4;
+	$pgFin = $pgActual + 5;
+}
+else{
+	$pgIni = $pgActual - 4;
+	$pgFin = $cantPaginas;
+}
+
+$offset =  ($pgActual-1) * $nroFilas;
+
+$lista_tipUsu = $objUsuario->buscartipUsu('',$descripcion,$nivel,$offset);
+
+?>
+<script type="text/javascript">
+document.oncontextmenu = function(){return false;}
+</script>
+<!DOCTYPE HTML PUBLIC >
+<html>
+  <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <link rel="stylesheet" href="../css/stilos.css" type="text/css">
+  <script type="text/javascript" src="../controlador/funciones.js"></script>
+  <script type="text/javascript" src="../controlador/calendario.js"></script>
+  <script type="text/javascript" src="../controlador/ajax.js"></script>
+  <script type="text/javascript" src="../controlador/validar.js"></script>
+    <script>
+
+function enviar(dato){
+ document.registro.pagina.value = 0;
+ document.registro.indBusq.value = dato;
+}
+
+function avanzaPg(){
+	pg = parseInt(window.document.registro.pagina.value);
+	window.document.registro.pagina.value = pg+1;
+	window.document.registro.submit();
+}
+
+function enviaPg(pag){
+	window.document.registro.pagina.value = pag;
+	window.document.registro.submit();
+}
+
+function regresaPg(){
+	pg = parseInt(window.document.registro.pagina.value);
+	window.document.registro.pagina.value = pg-1;
+	window.document.registro.submit();
+}
+
+function abrir(campo)
+{
+pagina=campo;
+window.open(pagina,"Reporte","menubar=no,toolbar=no,scrollbars=yes,width=1000,heigth=500,resizable=yes,left=50,top=50");
+}
+
+
+</script>
+  </head>
+  <body class="pagina">
+   <TABLE class="completo">
+    <TR>
+     <TD class="banner"></TD>
+    </TR>
+    <TR>
+     <TD >
+      <DIV class="menu">
+      <?php include("menu.php") ?>
+      </DIV>
+     </TD>
+    </TR>
+    <TR>
+     <TD class="cuerpo">
+      <DIV class="nivel1">
+       <DIV class="nivel2">
+<!--  Contenido Principal         -->
+  <form action="" method="post" name="registro">
+ <fieldset class="form">
+  <legend width="20" >  Criterios de B&uacute;squeda </legend>
+     <table  align="center" id="tabla1" name="tabla1">
+        <tr>
+
+<td  class="categoria">  Descripción:</td>
+<td>
+ <input name="descripcion" type="text" id="descripcion" maxlength="30"  size="20"  />
+</td>
+
+  <tr>
+        <td class="categoria">Nivel:</td>
+        <td class="dato" >
+            <select name="nivel" id="nivel">
+            <option value=""></option>
+            <option value="1">TECNOLOGIA</option>
+            <option value="2">IMCP</option>
+          
+          </select>
+        </td>
+      </tr>
+
+<!--<td  class="categoria">  nivel:</td>
+<td>
+ <input name="orden" type="text" id="orden" maxlength="5" size="10" onblur="javascript:this.value=this.value.toUpperCase()" />
+</td> -->
+      </tr>
+       <tr>
+           </td></tr>
+            <tr>
+            <td align="center" colspan="6" >
+            <input type="submit" value="Buscar" onclick="enviar(1)"/>
+            <input type="submit" onclick="enviar(2)" value="Limpiar"/>
+            <INPUT type="hidden" name="indBusq" id="indBusq">
+		    <INPUT type="hidden"  name="indReg" >
+		    <INPUT type="hidden" name="idUsu" >
+           </td>
+          </tr>
+  </table>
+
+   </fieldset>
+
+ <fieldset class="form">
+  <legend> Lista de Tipo de Usuario  </legend>
+
+       <DIV class="nivel2">
+      <table width="90%" align="center" class="detalles2" id="tabla2" name="tabla2">
+              <tr>
+              <td class="cabecera">Cod</td>
+              <td class="cabecera">Descripcion</td>
+              <td class="cabecera">Nivel/N° Dep</td>
+              <td class="cabecera">Departamento</td>
+              <td class="cabecera">M</td>
+            </tr>
+
+<? 	for($i=0;$i<count($lista_tipUsu);$i+=4){
+
+?>
+             	<tr id="fila<?=$i?>" class="datosimpar">
+             	<td align="center"><?= $lista_tipUsu[$i]?></td>
+              	 <td align="left"><?= $lista_tipUsu [$i+1]?></td>
+               	<td align="center"><?= $lista_tipUsu[$i+2]?></td>
+               	<td align="center"><?= $lista_tipUsu[$i+3]?></td>
+
+
+               <td><div align="center">
+          <a class="vinculo" href="modtipUsu.php?id=<?=$lista_tipUsu[$i]?>&indReg=1">
+	              <img src="imagenes/edit_f2.png" width="30" height="30">
+	          </a></div></td>
+
+	    	   </td>
+             </tr>
+<?}?>
+  <tr><td colspan=9> <?= 'Total Tipos de Usuarios: '.$contiTem?></td></tr>
+    </table>
+ </fieldset>
+
+<BR>
+ <div align="center">
+       <?php if($pgActual>1){?>
+         <img src="imagenes/atras.png" width="20" height="15" class="vinculo" onclick="regresaPg()">
+       <?php }
+         for($j=$pgIni;$j<=$pgFin;$j++){
+             $claseVinc = ($pgActual==$j)?"vinculoAzul":"vinculo";
+       ?>
+          <a class="<?= $claseVinc ?>" onclick="enviaPg(<?= $j ?>)"><?= $j ?></a>
+       <?php
+         }
+         if($pgActual<$pgFin){
+       ?>
+         <img src="imagenes/adelante.png" width="20" height="15"  class="vinculo" onclick="avanzaPg()">
+       <?php } ?>
+       <BR>
+		<input type="hidden" name="contiTem" id="contiTem" value="<?=$contiTem?>"/>
+       	<input type="hidden" name="hidden" id="id_disp"/>
+        <input type="hidden" name="pagina" value="<?php echo $pgActual ?>"/>
+
+       <br />
+     </div>
+    </form>
+<!--  FIN Contenido Principal         -->
+       </DIV>
+      </DIV>
+     </TD>
+    </TR>
+    <TR>
+     <TD class="piedepagina">
+      <?php include("piedepagina.php") ?>
+     </TD>
+    </TR>
+   </TABLE>
+  </body>
+</html>

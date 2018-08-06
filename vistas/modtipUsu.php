@@ -1,0 +1,164 @@
+<?php
+session_start();
+require('../modelos/conexion.php');
+require('../controlador/funciones.php');
+ require('../modelos/usuarios.php');
+
+
+ $objUsuario = new usuario();
+
+$host = $_SERVER["HTTP_HOST"];
+$aux = explode('/',$_SERVER["REQUEST_URI"]);
+$uri='';
+for ($i=0;$i<count($aux);$i++)$uri = $uri.$aux[$i]."/";
+$dir='http://'.$host.$uri;
+$permitidos = array(1,2);
+validaAcceso($permitidos,$dir);
+
+//$opc=$_GET['opr'];
+
+ $id=$_GET['id'];
+$codtipu=$_POST['codtipu'];
+$descripcion=$_POST['descripcion'];
+$nivel=$_POST['nivel'];
+$env=$_POST['env'];
+$indReg=$_POST['indReg'];
+
+
+if ($indReg==1)
+{
+  //$codtipu=$_GET['id'];
+	$modificar=$objUsuario->modificarTipUsu($codtipu,$descripcion,$nivel);
+
+		if ($modificar){
+       		echo '<SCRIPT>alert("Tipo de Usuario Modificado");</SCRIPT>';
+          	echo "<SCRIPT>window.location.href='listado_tipUsu.php';</SCRIPT>";
+	 	}
+		else {
+			 	echo 'holaaaa'.$codtipu;
+			echo '<SCRIPT>alert("Tipo de Usuario No Modificado" );</SCRIPT>';
+			$buscarTipUsu = $objUsuario->buscartipUsu($codtipu,'','',-1);
+
+
+		}
+
+}
+    /*    if ($_GET['codi'])
+  	    $co=$_GET['codi'];
+  	    else*/
+
+  	   	$buscarTipUsu = $objUsuario->buscartipUsu($id,'','',-1);
+
+?>
+
+<script >
+
+function validarCaract(dato){
+ var letras_mayusculas="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+ if (document.form1.descripcion.value.length==0){
+  alert("Debe Ingresar la descripcion ");
+  document.form1.descripcion.focus()
+  return (false);
+                                         }
+
+                                         else
+ {
+   var filter = /^[a-z0-9_\-\.\ \[\]\(\)]+$/i;
+   if (!filter.test(document.form1.descripcion.value)) {
+   alert('Carácteres no válidos en  la Descripcion');
+   document.form1.descripcion.focus();
+   return (false);}
+ }
+
+  if (document.form1.nivel.value.length==0){
+  alert("Debe seleccionar el nivel ");
+  document.form1.descripcion.focus()
+  return (false);
+                                         }
+
+
+ document.form1.indReg.value = dato;
+ document.form1.submit();
+
+}
+
+</script>
+
+<!DOCTYPE HTML PUBLIC >
+<html>
+<head>
+  <title>Modificar Estatus</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ 	 <link rel="stylesheet" type="text/css" href="../css/style.css">
+     <link rel="stylesheet" href="../css/stilos.css" type="text/css">
+     <link href="../css/classstyles.css" rel="stylesheet" type="text/css">
+ 	 <script type="text/javascript" src="../controlador/ajax.js"></script>
+     <script type="text/javascript" src="../controlador/funciones.js"></script>
+     <script type="text/javascript" src="../controlador/validar.js"></script>
+
+</head>
+  <body class="pagina">
+   <TABLE class="completo">
+    <TR>
+     <TD class="banner"></TD>
+    </TR>
+    <TR>
+     <TD >
+      <DIV class="menu">
+      <?php include("menu.php")  ?>
+      </DIV>
+     </TD>
+    </TR>
+    <TR>
+     <TD class="cuerpo">
+<form action="" method="post" name="form1" >
+
+    <table width="50%" height="147" align="center">
+      <tr>
+        <td colspan="2" ><div align="center" class="Not"><strong>Datos a Modificar </strong></div></td>
+      </tr>
+      <tr >
+        <td width="50%" class="TitNot"><div align="right"><strong>C&uacute;digo:</strong></div></td>
+
+        <td width="50%"><input name="codtipu" type="text" id="codtipu" value="<?php  echo $buscarTipUsu[0];?>" readonly></td>
+      </tr>
+      <tr >
+        <td class="TitNot"><div align="right"><strong>Descripci&oacute;n:</strong></div></td>
+        <td><input name="descripcion" type="text" size="20" id="descripcion" value="<?php  echo $buscarTipUsu[1];?> " onblur="javascript:this.value=this.value.toUpperCase()" ></td>
+      </tr>
+        <tr>
+        <td class="categoria">Nivel:</td>
+        <td class="dato" >
+            <select name="nivel" id="nivel">
+            <option  value="<?php echo  $buscarTipUsu[2]; ?>" ><?php echo $buscarTipUsu[3]; ?></OPTION>
+            <option value=""></option>
+            <option value="1">TECNOLOGIA</option>
+            <option value="2">CONTABILIDAD</option>
+            <option value="3">TESORERIA</option>
+            
+          </select>
+        </td>
+      </tr>
+
+         <tr >
+        <td height="12" colspan="2"><div align="center" class="NotCelda"><img src="imagenes/px1.gif" width="1" height="1"></div></td>
+      </tr>
+      <tr >
+        <td colspan="2"><div align="center">
+        <input type="hidden" name="indReg" >
+
+            <input type="button"  name="modificar" value="Modificar" onClick="validarCaract(1); return false"><input type="button" value="Atras" onclick="window.location.href='listado_tipUsu.php'" />
+        </div></td>
+      </tr>
+    </table>
+</form>
+	</TD>
+		</TR>
+		 <TR>
+     <TD class="piedepagina">
+      <?php include("piedepagina.php") ?>
+     </TD>
+    </TR>
+		</TABLE>
+ </body>
+</html>

@@ -1,0 +1,250 @@
+<?php
+session_start();
+require('../modelos/conexion.php');
+require('../controlador/funciones.php');
+require('../modelos/beneficiario.php');
+/*validaSesion();
+$permitidos = array('TIPO_002','TIPO_003','TIPO_004','TIPO_001','TIPO_005');
+validaAcceso($permitidos);
+*/
+
+$objBeneficiario = new beneficiario();
+
+$ci = $_GET['ci'];
+$tip = $_GET['tip'];
+$datos = $_POST['doc'];
+$indReg = $_POST['indReg'];
+
+
+	$listarDocumentos = $objBeneficiario->listarDocumentos($ci);
+
+if ($indReg==1){
+	$regDoc = $objBeneficiario->registrarDocumentos($ci,$tip,$datos);
+	if 	($regDoc){
+		 echo "<script>alert('Documentación Registrada');</script>";
+		 $listarDocumentos = $objBeneficiario->listarDocumentos($ci);
+		 echo "<script>window.close();</script>";
+	}
+}
+
+if ($indReg==3){
+    $listarDocumentos=null;
+}
+
+?>
+<!DOCTYPE html PUBLIC >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../css/stilos.css" type="text/css">
+<script type="text/javascript" src="../controlador/calendario.js"></script>
+<title>Registro de Documentos</title>
+<script>
+     function enviar(dato){
+         document.registro.indReg.value = dato;
+
+     }
+     function agregaPerm(){
+     	 //var cont = parseInt(document.getElementById('contPerm').value);
+         var tabla = document.getElementById('permEmb');
+         var row = document.createElement("TR");
+         var td = document.createElement('TD');
+         var campo = document.createElement('INPUT');
+         campo.type = 'TEXT';
+         campo.name = 'permiso[]';
+         td.appendChild(campo);
+         row.appendChild(td);
+         tabla.appendChild(row);
+     }
+</script>
+
+</head>
+
+<body class="pagina">
+<TABLE class="parametro" align="center" width="90%">
+<TD>
+ <form action="" method="post" name="registro">
+ <fieldset>
+  <legend>Documentos Obligatorios</legend>
+        <?php
+            for($i=0;$i<count($listarDocumentos);$i+=4){
+        	if ($listarDocumentos[$i+2]=='Cedula de Identidad') $ced=true;
+        	if ($listarDocumentos[$i+2]=='Rif') $Rif=true;
+        	if ($listarDocumentos[$i+2]=='Constancia de Trabajo') $ct=true;
+        	if ($listarDocumentos[$i+2]=='Carta de Solicitud') $cs=true;
+			if ($listarDocumentos[$i+2]=='Informe Medico') $im=true;
+			if ($listarDocumentos[$i+2]=='Carnet de Conadis') $cc=true;
+			if ($listarDocumentos[$i+2]=='Denuncia ante el indepabis') $di=true;
+			if ($listarDocumentos[$i+2]=='Titulo Medico/Enfermera') $te=true;
+			if ($listarDocumentos[$i+2]=='Credenciales/Carnet') $cr=true;
+			if ($listarDocumentos[$i+2]=='Titulo de Educadores') $ti=true;
+			if ($listarDocumentos[$i+2]=='Carnet Militar') $cm=true;
+			if ($listarDocumentos[$i+2]=='Carnet de Funcionario Publico') $cf=true;
+      } ?>
+     <table align="center">
+          <tr>
+           <td class="categoria">Cedula de Identidad:</td>
+           <td> <?php if (!$ced){ ?>
+           <input type="checkbox" size="20" name="doc[]" value="Cedula de Identidad" />
+          <!-- <input name="fecci" type="text" id="fecci" value="<?php if($ban==1)  echo $listCarac[$i+35];?>" size="10"  maxlength="10"  date_format="dd/MM/yy" onkeyup="javascript: mascara(this,'/',Array(2,2,4),true)" readonly=""/>
+           <img src="../images/cal.gif" width="16" height="16" onclick="show_calendar('document.forms[0].fecci',document.forms[0].fecci.value)" /></td>-->
+           <?php }else{ ?>
+           <IMG src="botones/correcto.png" width="20">
+           <?php } ?>
+           </td>
+		  </tr>
+		  <tr>
+           <td class="categoria">Rif:</td>
+           <td> <?php if (!$Rif){ ?>
+           <input type="checkbox" size="20" name="doc[]" value="Rif" />
+           <?php }else{ ?>
+           <IMG src="botones/correcto.png" width="20">
+           <?php } ?>
+           </td>
+		  </tr>
+		  <tr>
+		   <td class="categoria">Constancia de Trabajo:</td>
+           <td> <?php if (!$ct){ ?>
+           <input type="checkbox" size="20" name="doc[]" value="Constancia de Trabajo" />
+           <?php }else{ ?>
+           <IMG src="botones/correcto.png" width="20">
+           <?php } ?>
+           </td>
+		  </tr>
+		  <tr>
+           <td class="categoria">Carta de Solicitud:</td>
+           <td> <?php if (!$cs){ ?>
+           <input type="checkbox" size="20" name="doc[]" value="Carta de Solicitud" />
+           <?php }else{ ?>
+           <IMG src="botones/correcto.png" width="20">
+           <?php } ?>
+           </td>
+		  </tr>
+
+  </table>
+   </fieldset>
+  </legend>
+
+ <fieldset>
+  <legend>Requisitos para:
+   <?php
+        if ($tip==1) echo 'Personas/Discapacidad';
+        if ($tip==2) echo 'Victima de Estafa';
+        if ($tip==3) echo 'Medicos/Enfermeras';
+        if ($tip==4) echo 'Educadores';
+        if ($tip==5) echo 'Personal Militar';
+        if ($tip==6) echo 'Funcionarios publicos';
+
+   	?>
+	</legend>
+    <table align="center" id="permEmb" border="0" class="dato">
+          <?php if ($tip==1) { ?>
+          <tr>
+          <td class="categoria">Informe Medico:</td>
+           <td> <?php if (!$im){ ?>
+           <input type="checkbox" size="20" name="doc[]" value="Informe Medico" />
+           <?php }else{ ?>
+           <IMG src="botones/correcto.png" width="20">
+           <?php } ?>
+           </td>
+		  </tr>
+		  <tr>
+           <td class="categoria">Carnet de Conadis:</td>
+           <td> <?php if (!$cc){ ?>
+           <input type="checkbox" size="20" name="doc[]" value="Carnet de Conadis" />
+           <?php }else{ ?>
+           <IMG src="botones/correcto.png" width="20">
+           <?php } ?>
+           </td>
+		  </tr>
+		  <?php } ?>
+          <?php if ($tip==2) { ?>
+          <tr>
+           <td class="categoria">Denuncia ante el indepabis:</td>
+          <td> <?php if (!$di){ ?>
+           <input type="checkbox" size="20" name="doc[]" value="Denuncia ante el indepabis" />
+           <?php }else{ ?>
+           <IMG src="botones/correcto.png" width="20">
+           <?php } ?>
+           </td>
+		  </tr>
+		  <?php } ?>
+          <?php if ($tip==3) { ?>
+          <tr>
+           <td class="categoria">Titulo Medico/Enfermera:</td>
+           <td> <?php if (!$te){ ?>
+           <input type="checkbox" size="20" name="doc[]" value="Titulo Medico/Enfermera" />
+           <?php }else{ ?>
+           <IMG src="botones/correcto.png" width="20">
+           <?php } ?>
+           </td>
+		  </tr>
+		   <tr>
+           <td class="categoria">Credenciales/Carnet:</td>
+           <td> <?php if (!$cr){ ?>
+           <input type="checkbox" size="20" name="doc[]" value="Credenciales/Carnet" />
+           <?php }else{ ?>
+           <IMG src="botones/correcto.png" width="20">
+           <?php } ?>
+           </td>
+		  </tr>
+		  <?php } ?>
+          <?php if ($tip==4) { ?>
+          <tr>
+           <td class="categoria">Titulo de Educadores:</td>
+           <td> <?php if (!$ti){ ?>
+           <input type="checkbox" size="20" name="doc[]" value="Titulo de Educadores" />
+           <?php }else{ ?>
+           <IMG src="botones/correcto.png" width="20">
+           <?php } ?>
+           </td>
+		  </tr>
+		  <?php } ?>
+          <?php if ($tip==5) { ?>
+          <tr>
+           <td class="categoria">Carnet Militar:</td>
+           <td> <?php if (!$cm){ ?>
+           <input type="checkbox" size="20" name="doc[]" value="Carnet Militar" />
+           <?php }else{ ?>
+           <IMG src="botones/correcto.png" width="20">
+           <?php } ?>
+           </td>
+		  </tr>
+		  <?php } ?>
+		  <?php if ($tip==6) { ?>
+          <tr>
+           <td class="categoria">Carnet de Funcionario Publico:</td>
+           <td> <?php if (!$cf){ ?>
+           <input type="checkbox" size="20" name="doc[]" value="Carnet de Funcionario Publico" />
+           <?php }else{ ?>
+           <IMG src="botones/correcto.png" width="20">
+           <?php } ?>
+           </td>
+		  </tr>
+		  <?php } ?>
+
+	<!--	  <tr>
+           <td class="categoria">No ha consignado Ningun Documento</td>
+           <td><IMG src="botones/cancelado.png" width="20"></td>
+		  </tr>
+	-->
+  </table>
+ </fieldset>
+  </legend>
+   </td>
+  </tr>
+		  <tr>
+		  <td align="center" height="40">
+
+            <input type="submit" value="Guardar" onclick="enviar(1)"/>
+			<input type="hidden" name="indReg">
+			<input type="hidden" name="status" value = "<?php echo $listaDoc[5]?>">
+			<input type="hidden" name="indCom" value = "<?php echo $indCom ?>">
+            <input type="hidden" name="cont">
+          </tr>
+  </table>
+  </form>
+</td>
+</table>
+</body>
+</html>

@@ -1,0 +1,36 @@
+[database]
+	host 	 = 192.168.6.243
+	port     = 5432
+	username = postgres
+	password = postgres
+	name 	 = sirecov
+	schema	 = 002
+	
+
+[presirecov]
+	host 	 = localhost
+	port     = 5432
+	username = cidesa
+	password = cidesa
+	name 	 = suvinca
+	schema	 = sios
+
+[saime]
+	host 	 = 192.168.7.30
+	port     = 5432
+	username = saime
+	password = myctopusiphaidjiceysdeyghaspEejTidcakPawd2
+	name 	 = saime
+	schema	 = public
+
+
+
+
+
+[siga_rest]
+  server  = sigaws.suvinca.gob.ve
+  siga_server = sigadev.suvinca.gob.ve
+  codart_placa = 02-11-000242
+  codart_certificado_origen = 02-06-000106
+  costo_certificado_origen = 2031
+  

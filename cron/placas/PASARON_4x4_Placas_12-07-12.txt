@@ -1,0 +1,6 @@
+AF704PA - LTA12H2P5C2005910 Cargadas al sistema con Exito
+AF706PA - LTA12H2P1C2005872 Cargadas al sistema con Exito
+AF703PA - LTA12H2P4C2005882 Cargadas al sistema con Exito
+AF694PA - LTA12H2P3C2005937 Cargadas al sistema con Exito
+AF708PA - LTA12H2P9C2005814 Cargadas al sistema con Exito
+AF709PA - LTA12H2P0C2005992 Cargadas al sistema con Exito

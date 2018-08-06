@@ -1,0 +1,318 @@
+
+<link
+	href="imagenes/style.css" rel="stylesheet" type="text/css" />
+<div class="nav-container-outer">
+	<ul id="nav-container" class="nav-container">
+		<li><a class="item-primary" href="principal.php">Principal</a>
+		</li>
+		<li><span class="divider divider-vert"></span></li>
+		<li>
+
+		<li><a class="item-primary" href="#">Vehiculos</a>
+			<ul style="width: 170px;">
+				<li><a href="reg_vehiculos_nac.php">Nacional</a></li>
+				<li><a href="listado_vehiculos_nac.php">Listado Nacional</a></li>
+				<li><a href="reg_vehiculos_imp.php">Importados</a></li>
+				<li><a href="listado_vehiculos_imp.php">Listado Importados</a></li>
+				<li><a href="preinventario.php">Registrar PreInv.</a></li>
+				<li><a href="listado_vehiculos_nopdi.php">Veh. no Aprob. PDI</a></li>
+				<li><a class="item-primary" href="#">Placas &gt;</a>
+					<ul style="width: 100%;">
+					<li><a href="reg_placas.php">Registro Placas</a></li>-
+						<li><a href="listado_placas.php">Listado Placas</a></li>
+						<li><a href="listado_vehiculos_sinplaca.php">Vehiculos sin placa</a>
+						</li>
+
+					</ul>
+				</li>
+				<li><a class="item-primary" href="#">Caracteristicas &gt;</a>
+					<ul style="width: 100%;">
+						<li><a href="caracteristica_veh_nac.php">Nacional</a></li>
+						<li><a href="caracteristica_veh_imp.php">Importados</a></li>
+						<li><a href="listado_caracte_nac.php">Listado Nacional</a></li>
+						<li><a href="listado_caracte_imp.php">Listado Importados</a></li>
+					</ul>
+				</li>
+				<li><a class="item-primary" href="#">Certificado &gt;</a>
+					<ul style="width: 170px;">
+						 <li><a href="reg_certificado.php">Registrar</a></li>
+						<li><a href="listado_certificado.php">Listado</a></li>
+						<li><a href="reg_seguro.php">Seguro</a></li>
+						<li><a href="reg_reserva.php">Reserva D.</a></li>
+					</ul>
+				</li>
+
+				<li><a class="item-primary" href="#">Asignar &gt;</a>
+					<ul style="width: 100%;">
+						<li><a href="reg_asignacion.php">Asignar Vehiculo</a></li>
+						<li><a href="listado_asignacion.php">Listado Veh Asignados</a></li>
+						<li><a href="preproforma.php">Asignar Veh PreInv</a></li>
+						<li><a href="listado_preproforma.php">Listado Veh PreInv</a></li>
+					</ul>
+				</li>
+
+			</ul>
+		</li>
+		<li><a class="item-primary" href="#">Beneficiarios</a>
+			<ul style="width: 170px;">
+				<!--  <li><a href="reg_beneficiarios.php">Registro</a></li>-->
+				<li><a href="listado_beneficiariosExp.php">Listado</a></li>
+				<li><a href="reg_beneficiariosExp.php">Registro Credito</a></li>
+				<li><a href="reg_beneficiarios.php">Registro Contado</a></li>
+				<li><a href="reg_beneficiarios_c.php">Registro Instituciones</a></li>
+				<li><a href="cuadroResumenBenefxEstado.php">Consolidado por Estado</a>
+				</li>
+				<!--   <li><a href="listado_beneficiariosExp.php">Listado Exp</a></li>-->
+				<li><a class="item-primary" href="#">Citas &gt;</a>
+					<ul style="width: 170px;">
+						<li><a href="listado_citas.php">Listado Citas</a></li>
+						<li><a href="listado_beneficiariosCitasSol.php">Benef. Citas</a></li>
+						<li><a href="cuadroResumenCitasxEstado.php">Consolidado por Estado</a>
+						</li>
+						<li><a href="cuadroResumenCitasxBanco.php">Consolidado por Banco</a>
+						</li>
+					</ul>
+				</li>
+				<li><a href="Cbene.php">Carga Beneficiarios</a>
+				</li>
+			</ul>
+		</li>
+		<li><a class="item-primary" href="#">Factura Prof.</a>
+			<ul style="width: 200px;">
+				<li><a href="reg_factura.php">Registrar Factura Proforma</a></li>
+				<li><a href="listado_factura.php">Listado</a></li>
+				<li><a href="listado_factura_acto.php">Listado Acto</a></li>
+				<li><a href="listadoActo_op.php">Listado Acto operaciones</a></li>
+				<li><a href="listadoActo_admveh.php">Listado Acto Documentación</a>
+				</li>
+				<li><a href="reg_facturapreinv.php">Registrar Factura PreProf.</a></li>
+				<li><a href="listado_facturaPreInv.php">Listado Facturas
+						Pre-Proformas</a></li>
+			</ul>
+		</li>
+
+		<li><a class="item-primary" href="#">Varios</a>
+			<ul style="width: 170px;">
+				<li><a class="item-secondary" href="#">Pagos&nbsp;&nbsp;&gt;</a>
+					<ul style="width: 100%;">
+						<li><a href="listado_pagos.php?id_caso=2">Lista de pagos...</a></li>
+						<li><a href="listado_pagos_anulados.php?id_caso=2">Listado de
+								pagos Anulados...</a></li>
+						<li><a href="reg_pago.php">Registrar pagos Parciales...</a></li>
+					</ul>
+				</li>
+				<li><a class="item-secondary" href="#">Remision de Certificados &gt;
+				</a>
+					<ul style="width: 100%;">
+						<li><a href="memoCertificados.php">Registrar Remision Cert.</a></li>
+						<li><a href="listado_memoCertificados.php">Listado Remision Cert.</a>
+						</li>
+					</ul>
+				</li>
+				<li><a class="item-secondary" href="#">Remision de Expediente &gt;</a>
+					<ul style="width: 100%;">
+						<li><a href="memoExpediente.php">Registrar Remision Exp.</a></li>
+						<li><a href="listado_memoExpediente.php">Listado Remision Exp.</a>
+						</li>
+					</ul>
+				</li>
+				<li><a class="item-primary" href="consulta_status.php">Consulta
+						Estatus Exp.</a>
+
+				<li><a class="item-primary" href="#">Estatus Credito &gt;</a>
+					<ul style="width: 170px;">
+						<li><a href="reg_estatusCredito.php">Registro</a></li>
+						<li><a href="listado_estatusCredito_admin.php">Listado</a></li>
+						<li><a href="listado_resumen_estatus_credito.php">Consolidado por
+								Banco</a></li>
+					</ul>
+				</li>
+				<li><a class="item-secondary" href="#">Carga Masiva Veh. Entregados
+						&gt;</a>
+					<ul style="width: 100%;">
+						<li><a href="entrega_auto.php">Registrar entrega</a></li>
+					</ul>
+
+				<li><a class="item-primary" href="#">Vines &gt;</a>
+					<ul style="width: 230px;">
+						<li><a href="vinescarga.php">Archivo (buque-almacen-despacho)</a>
+						</li>
+						<li><a href="listadovines.php">Listado (buque-almacen-despacho)</a>
+						<li><a href="listadovinesmovi.php">Movimientos (buque-almacen-despacho)</a></li>
+						</li>
+
+					</ul>
+				</li>
+			</ul>
+	</li>
+	<li><span class="divider divider-vert"></span></li>
+	<li><a class="item-primary" href="#">Reportes</a>
+		<ul style="width: 190px;">
+			<li><a href="listado_facturasOriginales.php">Listado Facturas
+					Originales</a></li>
+			<li><a href="listado_preinventario.php">Listar PreInv.</a></li>
+			<li><a href="reporte_preInventario.php">Reporte Pre Inventario</a></li>
+			<li><a href="reporte_preInventarioMinco.php">Reporte MINCO</a></li>
+			<li><a href="listado_veh_ent_marca.php">Vehiculos Ent x Marca...</a>
+			</li>
+			<li><a href="cuadroResumenBancoVeh.php">Vehiculos Marca x Estatus...</a>
+			</li>
+			<li><a href="cuadroResumenBancoVehMoviProf.php">Movimientos
+					Proformas...</a></li>
+			<!-- <li><a href="listado_reportes.php">Reporte de ventas...</a></li>-->
+			<li><a href="listado_vehiculos_lote.php">Reporte de Veh x Lote...</a>
+			</li>
+			<li><a href="listado_resumen_certemit_banco.php">Consolidado x marca
+					y Banco</a></li>
+			<li><a href="listado_pago.php">Listado Pagos</a></li>
+			<li><a href="listado_pagospersonas.php">Listado Pagos Personas</a></li>
+			<li><a href="cuadro_iniciales_consig_banco.php">Iniciales Consignadas
+					por Banco</a></li>
+			<li><a href="listado_entregas.php">Lista de entregas</a></li>
+			<li><a href="listado_beneficiariosExp.php">Lista Beneficiarios
+					Expedientes</a></li>
+			<li><a href="listado_resumen_vehiculos_estado.php">Lista Vehiculos x Edo.</a></li>
+					
+			<li><a class="item-primary" href="#">Lista Taxis x Edo.&gt;</a>
+					<ul style="width: 100%;">
+					<li><a href="listado_resumen_taxis_estado.php">Asignados</a></li>
+					<li><a href="listado_resumen_taxis_estado_estatus.php">Estatus Factura Prof.</a></li>
+					</ul>
+			</li>		
+					
+					
+			<li><a href="listado_factura.php">Listado de Facturas Proformas</a></li>
+			<li><a href="listado_relacion_cheques.php">Lista Remisión de
+					cheques...</a></li>
+			<li><a href="reporte_creditocontadominco.php">Cuadro Creditos vs
+					Contado</a></li>
+
+			<li><a href="reporte_contadominco.php">Contado por Modelos</a></li>
+
+		</ul>
+	</li>
+	<li><a class="item-primary" href="#">Rep. Reuniones</a>
+		<ul style="width: 330px;">
+			<li><a href="CuadroResCitasMin.php">Citas Otorgadas </a></li>
+			<li><a href="cuadro_poblacion_atendida2.php">Poblacion Atendida por
+					Regiones </a></li>
+
+			<li><a href="reporte_creditobancapublica2.php">Diagnostico Creditos
+					Banca Publica </a></li>
+			<li><a href="reporte_creditocontadominco.php">Entrega de vehiculos
+					por entidad financiera y de contado </a></li>
+			<li><a href="cuadroResumenCitasxBanco.php">Listado Resumen Citas por
+					Banco</a></li>
+			<li><a href="reporte_preInventarioMinco.php">Reporte MINCO</a></li>
+			<li><a href="reporte_mincoSuvinca.php">Reporte MINCO2</a></li>
+			<li><a href="reporte_beneficiario_tipo.php">Personas registradas en
+					sistema</a></li>
+			 <li><a href="reporte_mincoSuvinca2.php">Reporte Global de Vehiculos.</a></li>	
+                          <li><a href="reporte_mincoSuvinca3.php">Reporte Global Programa Taxis</a></li>	
+			<li><a href="reporte_contadominco.php">Contado por Modelos</a></li>
+			<li><a href="reporte_estadistico_agrupado.php">Reporte estadistico</a>
+			</li>
+			<li><a href="reporte_estadistico2.php">Reporte estadistico 2</a></li>
+		</ul>
+	</li>
+	<li><span class="divider divider-vert"></span></li>
+	<li><span class="divider divider-vert"></span></li>
+	<li><a class="item-primary" href="#">Txt</a>
+		<ul style="width: 190px;">
+			<li><a href="reg_txt_veh.php">Vehículo</a></li>
+			<li><a href="reg_txt_pro.php">Beneficiarios</a></li>
+			<li><a href="reg_txt_pla.php">Placas</a></li>
+	        <li><a href="reg_txt_veh_com.php">Vehículo Comercializacion</a></li>
+	        <li><a href="reg_txt_pro_com.php">Beneficiarios Comercializacion</a></li>
+	        <li><a href="reg_txt_pla_com.php">Placas Comercializacion</a></li>
+			<li><a href="reg_autorizacion.php">Autorización para el INTTT</a></li>
+			<li><a href="listado_enviosVeh.php">Consultar Estatus Envío</a></li>
+			<li><a href="regSta_enviosVeh.php">Registro Status de Envio</a></li>
+			<li><a href="Sta_enviosVeh.php">Listado Status de Envio</a></li>
+			<li><a href="regSta_enviosVehDet.php">Registro Status de Envio Det.</a>
+			</li>
+			<li><a href="regSta_enviosVehElim.php">Enviar Eliminados al Intt</a>
+			</li>
+			<li><a href="consulta_VehINTT.php">Consultar INTT</a></li>
+		</ul>
+	</li>
+	<li><span class="divider divider-vert"></span></li>
+	<li><span class="divider divider-vert"></span></li>
+	<li><a class="item-primary" href="#">Carga Masiva</a>
+		<ul style="width: 190px;">
+		<li><a href="placa.php">Carga Placas</a></li>
+			</ul>
+	</li>
+
+
+	<li><a class="item-primary" href="#">Admin</a>
+		<ul style="width: 190px;">
+			<li><a href="listado_bitacora_beneficiario.php">Bitacora Benef.</a></li>
+			<li><a href="listado_bitacora_auditoria.php">Bitacora Auditoria</a></li>
+			<li><a href="listado_bitacora_beneficiario_pre.php">Bitacora
+					Presirecov.</a></li>
+			<li><a href="reporte_mincoSuv_concil.php">Conciliar Inventario.</a></li>
+			<li><a class="item-primary" href="#">Reclamos &gt;</a>
+				<ul style="width: 170px;">
+					<li><a href="reg_reclamos.php">Registrar</a>
+					</li>
+					<li><a href="listado_reclamos.php">Listado</a>
+					</li>
+				</ul>
+			</li>
+			<li><a href="listado_excepciones.php">Excepciones</a></li>
+			<li><a href="listado_concesionarios.php">Concesionarios</a></li>
+			<li><a href="listado_disp.php">Listado Disponibilidad</a></li>
+			<li><a class="item-primary" href="listado_ips.php">IP's</a></li>
+			<li><a class="item-primary" href="listado_ips_rep.php">IP's Repetidas</a>
+			</li>
+			<li><a class="item-primary" href="#">Usuarios &gt;</a>
+				<ul style="width: 170px;">
+					<li><a href="reg_usuario.php">Registrar</a>
+					</li>
+					<li><a href="listado_usuarios.php">Buscar</a>
+					</li>
+					<li><a href="nueva_clave.php">Cambio de Clave</a>
+					</li>
+				</ul>
+			</li>
+
+		</ul>
+	</li>
+	<li><a class="item-primary" href="#">Reg. Maestros</a>
+		<ul style="width: 190px;">
+
+			<li><a class="item-primary" href="#">Estatus &gt;</a>
+				<ul style="width: 170px;">
+					<li><a href="reg_status.php">Registrar</a>
+					</li>
+					<li><a href="listado_status.php">Buscar</a>
+					</li>
+				</ul>
+
+			<li><a class="item-primary" href="#">Tipo Usuario &gt;</a>
+				<ul style="width: 170px;">
+					<li><a href="reg_tipUsu.php">Registrar</a>
+					</li>
+					<li><a href="listado_tipUsu.php">Buscar</a>
+					</li>
+				</ul>
+
+			<li></li>
+
+		</ul>
+	</li>
+	<li><span class="divider divider-vert"></span></li>
+	<li><a class="item-primary" href="#">Reclamos</a>
+		<ul style="width: 190px;">
+			<li><a href="regReclamos.php">Registro de Reclamos</a></li>
+			<li><a href="listado_reclamos.php">Listado de Reclamos</a></li>
+
+		</ul>
+	</li>
+	<li><span class="divider divider-vert"></span></li>
+	<li><a class="item-primary" href="cierra_sesion.php">Salir</a></li>
+	<li class="clear">&nbsp;</li>
+	</ul>
+
+</div>

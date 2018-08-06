@@ -1,0 +1,81 @@
+<link href="imagenes/style.css" rel="stylesheet" type="text/css" />
+<div class="nav-container-outer">
+   <ul id="nav-container" class="nav-container">
+    <!--<li><a class="item-primary" href="alertas_factura.php">Alertas</a>
+    <ul style="width:170px;">
+	    <li><a href="principal.php">Principal</a></li>
+    </ul>
+    </li>-->
+     <li><a class="item-primary" href="#">Vehiculo.</a>
+      <ul style="width:200px;">
+        <li><a href="listado_factura_acto.php">Listado Acto</a></li>
+            <li><a href="listado_vehiculos_imp.php">Listado Importados</a></li>
+            <li><a href="listado_vehiculos_nopdi.php">Veh. no Aprob. PDI</a></li>
+     </ul>
+    </li>
+      <li><a class="item-primary" href="#">Placas.</a>
+      <ul style="width:200px;">
+        <li><a href="reg_placas.php">Registro Placas</a></li>
+            <li><a href="listado_placas.php">Listado Placas</a></li>
+            <li><a href="listado_vehiculos_sinplaca.php">Vehiculos sin placa</a></li>
+     </ul>
+    </li>
+       <li><a class="item-primary" href="#">Rep. Reuniones </a>
+       <ul style="width:330px;">
+       <li><a href="reporte_creditobancapublica2.php">Diagnostico Creditos Banca Publica </a></li>
+       <li><a href="reporte_creditocontadominco.php">Entrega de vehiculos por entidad financiera y de contado </a></li>
+       <li><a href="cuadroResumenCitasxBanco.php">Listado Resumen Citas por Banco </a></li>
+       <li><a href="cuadroResumenCitasxBanco.php">Listado Resumen Citas por Banco</a></li>
+       <li><a href="reporte_preInventarioMinco.php">Reporte MINCO</a></li>
+       <li><a href="reporte_beneficiario_tipo.php">Personas registradas en sistema</a></li>
+       <li><a href="reporte_contadominco.php">Contado por Modelos</a></li>
+     </ul>
+    </li>
+     <li><a class="item-primary" href="#">Factura Prof.</a>
+      <ul style="width:200px;">
+        <li><a href="listadoActo_op.php">Listado Acto</a></li>
+         <li><a href="listado_factura.php">Listado</a></li>
+     </ul>
+    </li>
+
+      <li><span class="divider divider-vert" ></span></li>
+      <li><a class="item-primary" href="#">Reportes</a>
+        <ul style="width:190px;">
+        <?php
+        if ($_SESSION['usuario']=='nreina') {
+        ?>
+           <li><a class="item-primary" href="consulta_status.php">Consulta Estatus Exp.</a>
+        <?php     }        ?>
+        <li><a href="listado_facturasOriginales.php">Listado Facturas Originales</a></li>
+        <li><a href="listado_preinventario.php">Listar PreInv.</a></li>
+   	    <li><a href="reporte_preInventario.php">Reporte Pre Inventario</a></li>
+   	    <li><a href="listado_veh_ent_marca.php">Vehiculos Ent x Marca</a></li>
+       <li><a href="cuadroResumenBancoVeh.php">Vehiculos Marca x Estatus...</a></li>
+       <li><a href="cuadroResumenBancoVehMoviProf.php">Movimientos Proformas...</a></li>
+       <!-- <li><a href="listado_reportes.php">Reporte de ventas...</a></li>-->
+       <li><a href="listado_vehiculos_lote.php">Reporte de Veh x Lote...</a></li>
+       <li><a href="listado_resumen_certemit_banco.php">Consolidado x marca y Banco</a></li>
+       <li><a href="listado_pago.php">Listado Pagos</a></li>
+       <li><a href="listado_pagospersonas.php">Listado Pagos Personas</a></li>
+       <li><a href="cuadro_iniciales_consig_banco.php">Iniciales Consignadas por Banco</a></li>
+       <li><a href="listado_entregas.php">Lista de entregas</a></li>
+       <li><a href="listado_beneficiariosExp.php">Lista Beneficiarios Expedientes</a></li>
+       <li><a href="listado_resumen_vehiculos_estado.php">Lista Vehiculos x Edo.</a></li>
+       <li><a href="cuadroResumenBancoliquidados.php">Creditos Liquidados</a></li>
+       <li><a href="reporte_creditobancapublica.php">Banca Publica </a></li>
+
+       </ul>
+    </li>
+    <li><span class="divider divider-vert" ></span></li>
+      <li><a class="item-primary" href="#">Txt</a>
+        <ul style="width:190px;">
+	      <li><a href="listado_enviosVeh.php">Consultar Estatus Envío</a></li>
+	    </ul>
+    </li>
+    <li><span class="divider divider-vert" ></span></li>
+    <li><a class="item-primary" href="nueva_clave.php">Clave</a>
+      <li><span class="divider divider-vert" ></span></li>
+     <li><a class="item-primary" href="cierra_sesion.php">Salir</a></li>
+     <li class="clear">&nbsp;</li>
+   </ul>
+</div>

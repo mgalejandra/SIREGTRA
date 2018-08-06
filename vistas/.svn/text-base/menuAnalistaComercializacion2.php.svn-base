@@ -1,0 +1,65 @@
+
+<link href="imagenes/style.css" rel="stylesheet" type="text/css" />
+<div class="nav-container-outer">
+   <ul id="nav-container" class="nav-container">
+    <li><a class="item-primary" href="principal.php">Principal</a>
+    <ul style="width:170px;">
+    </ul>
+    </li>
+    <li><span class="divider divider-vert" ></span></li>
+    <li>
+    	<a class="item-primary" href="#">Caracteristicas</a>
+        <ul style="width:170px;">
+	    <li><a href="caracteristica_veh_nac.php">Nacional</a></li>
+	    <li><a href="caracteristica_veh_imp.php">Importados</a></li>
+	    <li><a href="listado_caracte_nac.php">Listado Nacional</a></li>
+	    <li><a href="listado_caracte_imp.php">Listado Importados</a></li>
+    </ul>
+    </li>
+	<li><span class="divider divider-vert" ></span></li>
+	<li><a class="item-primary" href="#">Vehiculos</a>
+      <ul style="width:170px;">
+	    <li><a href="reg_vehiculos_nac.php">Nacional</a></li>
+	    <li><a href="reg_vehiculos_imp.php">Importados</a></li>
+	    <li><a href="listado_vehiculos_nac.php">Listado Nacional</a></li>
+	    <li><a href="listado_vehiculos_imp.php">Listado Importados</a></li>
+     </ul>
+    </li>
+      <li>
+     <a class="item-primary" href="#">Placas</a>
+      <ul style="width:170px;">
+       <li><a href="reg_placas.php">Registro</a></li>
+       <li><a href="listado_placas.php">Listado</a></li>
+     </ul>
+    </li>
+	
+     <li><a class="item-primary" href="#">Certificado</a>
+      <ul style="width:170px;">
+       <li><a href="reg_certificado.php">Registrar</a></li>
+       <li><a href="listado_certificado_tec.php">Listado</a></li>
+ 
+     </ul>
+    </li>
+</li>
+    <li><span class="divider divider-vert" ></span></li>
+
+      <li><a class="item-primary" href="#">Txt</a>
+        <ul style="width:190px;">
+       	  <li><a href="reg_txt_veh_com.php">Vehículo</a></li>
+	      <li><a href="reg_txt_pro_com.php">Beneficiarios</a></li>
+	      <li><a href="reg_txt_pla_com.php">Placas</a></li>
+	      <li><a href="reg_autorizacion.php">Autorización para el INTTT</a></li>
+	      <li><a href="listado_enviosVeh.php">Consultar Estatus Envío</a></li>
+	      <li><a href="regSta_enviosVeh.php">Registro Status de Envio</a></li>
+	      <li><a href="Sta_enviosVeh.php">Listado Status de Envio</a></li>
+	      <li><a href="regSta_enviosVehDet.php">Registro Status de Envio Det.</a></li>
+	      <li><a href="regSta_enviosVehElim.php">Enviar Eliminados al Intt</a></li>
+	    </ul>
+    </li>
+    <li><span class="divider divider-vert" ></span></li>
+    <li><a class="item-primary" href="nueva_clave.php">Cambio de Clave</a>
+      <li><span class="divider divider-vert" ></span></li>
+     <li><a class="item-primary" href="cierra_sesion.php">Salir</a></li>
+     <li class="clear">&nbsp;</li>
+   </ul>
+</div

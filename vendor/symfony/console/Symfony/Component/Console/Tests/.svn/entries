@@ -1,0 +1,89 @@
+10
+
+dir
+11463
+http://192.168.6.221/repositorio/branches/refeciv1.1-int/vendor/symfony/console/Symfony/Component/Console/Tests
+http://192.168.6.221/repositorio
+
+
+
+2015-04-08T17:11:39.560240Z
+10861
+j.figueroa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+95196396-bcff-4ccf-a1e0-7743aec5cb1f
+
+Formatter
+dir
+
+Tester
+dir
+
+Fixtures
+dir
+
+ApplicationTest.php
+file
+
+
+
+
+2015-03-24T21:42:58.693790Z
+07fbfcc3c38587c45bdfed677837d666
+2015-03-24T21:33:47.051231Z
+10857
+j.figueroa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+47794
+
+Command
+dir
+
+Descriptor
+dir
+
+Helper
+dir
+
+Input
+dir
+
+Logger
+dir
+
+Output
+dir
+

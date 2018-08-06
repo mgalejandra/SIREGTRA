@@ -1,0 +1,105 @@
+
+<link href="imagenes/style.css" rel="stylesheet" type="text/css" />
+<div class="nav-container-outer">
+   <ul id="nav-container" class="nav-container">
+  <!--  <li><a class="item-primary">Alertas</a>
+    <ul style="width:170px;">
+	    <li><a href="principal.php">Principal</a></li>
+    </ul>
+    </li>-->
+
+    <li><a class="item-primary" href="#">Asignar</a>
+      <ul style="width:170px;">
+       <!--<li><a href="reg_asignacion.php">Asignar Vehiculo</a></li>-->
+       <li><a href="listado_asignacion.php">Listado Vehiculos Asignados</a></li>
+       <!--<li><a href="preproforma.php">Asignar Vehiculo PreInv</a></li>-->
+	   <li><a href="listado_preproforma.php">Listado Vehiculo PreInv</a></li>
+     </ul>
+    </li>
+     <li><a class="item-primary" href="#">Certificado</a>
+      <ul style="width:170px;">
+      <!-- <li><a href="reg_certificado.php">Registrar</a></li>-->
+      <li><a href="listado_certificado.php">Listado</a></li>
+      <li><a href="reg_seguro.php">Seguro</a></li>
+      <li><a href="reg_reserva.php">Reserva D.</a></li>
+     </ul>
+    </li>
+     <li><a class="item-primary" href="#">Factura Prof.</a>
+      <ul style="width:200px;">
+       <!-- <li><a href="reg_factura.php">Registrar Factura Proforma</a></li>-->
+       <li><a href="listado_factura.php">Listado</a></li>
+        <li><a href="listado_factura_acto.php">Listado Acto</a></li>
+       <!-- <li><a href="reg_facturapreinv.php">Registrar Factura PreProf.</a></li>-->
+        <li><a href="listado_facturaPreInv.php">Listado Facturas Pre-Proformas</a></li>
+     </ul>
+    </li>
+    <li><a class="item-primary" href="#">Varios</a>
+      	<ul style="width:170px;">
+    		<li><a class="item-secondary" href="#">Pagos&nbsp;&nbsp;&gt;</a>
+	    		<ul style="width:100%;">
+	     			<li><a href="listado_pagos.php?id_caso=2">Lista de pagos...</a></li>
+	     			<!--<li><a href="reg_pago.php">Registrar pagos Parciales...</a></li>-->
+	    		</ul>
+    		</li>
+      		<li><a class="item-secondary" href="#">Remision de Certificados > </a>
+	    		<ul style="width:100%;">
+	     			<li><a href="memoCertificados.php">Registrar Remision Cert.</a></li>
+	     			<li><a href="listado_memoCertificados.php">Listado Remision Cert.</a></li>
+	    		</ul>
+    		</li>
+      		<li><a class="item-secondary" href="#">Remision de Expediente ></a>
+	    		<ul style="width:100%;">
+	     			<li><a href="memoExpediente.php">Registrar Remision Exp.</a></li>
+	     			<li><a href="listado_memoExpediente.php">Listado Remision Exp.</a></li>
+	    		</ul>
+    		</li>
+    		   <li><a class="item-secondary" href="#">Carga Masiva Veh. Entregados ></a>
+	    		    <ul style="width:100%;">
+	     			<li><a href="entrega_auto.php">Registrar entrega</a></li>
+	    		</ul>
+    		</li>
+     	</ul>
+    </li>
+    
+
+      <li><span class="divider divider-vert" ></span></li>
+      <li><a class="item-primary" href="#">Reportes</a>
+        <ul style="width:190px;">
+        <li><a href="listado_preinventario.php">Listar PreInv.</a></li>
+   	    <li><a href="reporte_preInventario.php">Reporte Pre Inventario</a></li>
+       <li><a href="cuadroResumenBancoVeh.php">Vehiculos Marca x Estatus...</a></li>
+       <li><a href="cuadroResumenBancoVehMoviProf.php">Movimientos Proformas...</a></li>
+       <li><a href="listado_vehiculos_lote.php">Reporte de Veh x Lote...</a></li>
+       <li><a href="listado_resumen_certemit_banco.php">Consolidado x marca y Banco</a></li>
+       <li><a href="listado_pago.php">Listado Pagos</a></li>
+       <li><a href="listado_pagospersonas.php">Listado Pagos Personas</a></li>
+       <li><a href="cuadro_iniciales_consig_banco.php">Iniciales Consignadas por Banco</a></li>
+       <li><a href="listado_entregas.php">Lista de entregas</a></li>
+       <li><a href="listado_beneficiariosExp.php">Lista Beneficiarios Expedientes</a></li>
+       <li><a href="listado_resumen_vehiculos_estado.php">Lista Vehiculos x Edo.</a></li>
+       </ul>
+    </li>
+  <li><span class="divider divider-vert" ></span></li>
+      <li><a class="item-primary" href="#">Txt</a>
+        <ul style="width:190px;">
+          <li><a href="reg_txt_veh_com.php">Vehículo Comercializacion</a></li>
+	      <li><a href="reg_txt_pro_com.php">Beneficiarios Comercializacion</a></li>
+	      <li><a href="reg_txt_pla_com.php">Placas Comercializacion</a></li>
+	      <li><a href="reg_txt_veh.php">Vehículo</a></li>
+	      <li><a href="reg_txt_pro.php">Beneficiarios</a></li>
+	      <li><a href="reg_txt_pla.php">Placas</a></li>
+	      <li><a href="reg_autorizacion.php">Autorización para el INTTT</a></li>
+	      <li><a href="listado_enviosVeh.php">Consultar Estatus Envío</a></li>
+	      <li><a href="regSta_enviosVeh.php">Registro Status de Envio</a></li>
+	      <li><a href="Sta_enviosVeh.php">Listado Status de Envio</a></li>
+	      <li><a href="regSta_enviosVehDet.php">Registro Status de Envio Det.</a></li>
+	      <li><a href="regSta_enviosVehElim.php">Enviar Eliminados al Intt</a></li>
+      	    </ul>
+    </li>
+      <li><span class="divider divider-vert" ></span></li>
+    <li><a class="item-primary" href="nueva_clave.php">Clave</a>
+      <li><span class="divider divider-vert" ></span></li>
+     <li><a class="item-primary" href="cierra_sesion.php">Salir</a></li>
+     <li class="clear">&nbsp;</li>
+   </ul>
+</div>

@@ -1,0 +1,307 @@
+<?php
+session_start();
+require('../modelos/conexion.php');
+require('../controlador/funciones.php');
+require('../modelos/factura.php');
+
+	$host = $_SERVER["HTTP_HOST"];
+	$aux = explode('/',$_SERVER["REQUEST_URI"]);
+	$uri='';
+	for ($i=0;$i<count($aux);$i++)$uri = $uri.$aux[$i]."/";
+	$dir='http://'.$host.$uri;
+	$permitidos = array(1,3,4,5);
+	validaAcceso($permitidos,$dir);
+
+  $factura=$_POST['factura'];
+  $sercarveh=$_POST['sercarveh'];
+  $fec=$_POST['fec'];
+  $fec2=$_POST['fec2'];
+  $codpro = $_POST['codpro'];
+  $nombre = $_POST['nombre'];
+  $pgActual = $_POST['pagina'];
+  $tipo= $_POST['tipo'];
+  $dia= $_POST['dia'];
+  $sig= $_POST['sig'];
+  $indBusq= $_POST['indBusq'];
+
+  if ($indBusq=='2'){
+  $factura=NULL;
+  $sercarveh=NULL;
+  $fec=NULL;
+  $fec2=NULL;
+  $codpro =NULL;
+  $nombre =NULL;
+  $pgActual =NULL;
+  $tipo=NULL;
+  $dia=NULL;
+  $sig=NULL;
+  $indBusq=NULL;
+  }
+
+
+$objFactura = new factura();
+
+
+
+$nroFilas = 15;
+$nroCampos = 12;
+
+$contArt = $objFactura->contAlertasFacturas($factura,$sercarveh,$fec,$fec2,$codpro,$nombre,$dia,$sig);
+
+$cantPaginas = ceil($contArt/($nroFilas));
+if(!$pgActual){
+	$pgActual = 1;
+}
+elseif($pgActual > $cantPaginas){
+     $pgActual = $cantPaginas;
+}
+
+if($cantPaginas <= 10){
+	$pgIni = 1;
+	$pgFin = $cantPaginas;
+}
+elseif($cantPaginas > 10 AND $pgActual< 5 ){
+	$pgIni = 1;
+	$pgFin = 10;
+}
+elseif($cantPaginas > ($pgActual+5) AND $pgActual >= 5 ){
+	$pgIni = $pgActual - 4;
+	$pgFin = $pgActual + 5;
+}
+else{
+	$pgIni = $pgActual - 4;
+	$pgFin = $cantPaginas;
+}
+
+
+$offset =  ($pgActual-1) * $nroFilas;
+
+$listarFactura=$objFactura->alertasFacturas($factura,$sercarveh,$fec,$fec2,$offset,$codpro,$nombre,$dia,$sig);
+?>
+<!DOCTYPE HTML PUBLIC >
+<html>
+  <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <link rel="stylesheet" href="../css/stilos.css" type="text/css">
+  <script type="text/javascript" src="../controlador/funciones.js"></script>
+  <script type="text/javascript" src="../controlador/calendario.js"></script>
+   <script>
+
+function avanzaPg(){
+	pg = parseInt(window.document.registro.pagina.value);
+	window.document.registro.pagina.value = pg+1;
+	window.document.registro.submit();
+}
+
+function enviaPg(pag){
+	window.document.registro.pagina.value = pag;
+	window.document.registro.submit();
+}
+
+
+function regresaPg(){
+	pg = parseInt(window.document.registro.pagina.value);
+	window.document.registro.pagina.value = pg-1;
+	window.document.registro.submit();
+}
+
+function enviar(campo){
+	window.document.registro.indBusq.value = campo;
+	window.document.registro.submit();
+}
+function abrir(campo)
+{
+pagina=campo;
+window.open(pagina,"Reporte","menubar=no,toolbar=no,scrollbars=yes,width=1000,heigth=500,resizable=yes,left=50,top=50");
+}
+function popup(URL) {
+  day = new Date();
+  id = day.getTime();
+  eval("page" + id + " = window.open(URL, 'URL', 'toolbar=0,scrollbars=1,location=0,statusbar=1,menubar=0,resizable=0,width=600,height=600');");
+}
+
+</script>
+  </head>
+  <body class="pagina">
+   <TABLE class="completo">
+    <TR>
+     <TD class="banner"></TD>
+    </TR>
+    <TR>
+     <TD >
+      <DIV class="menu">
+       <?php include("menu.php") ?>
+      </DIV>
+     </TD>
+    </TR>
+    <TR>
+     <TD class="cuerpo">
+      <DIV class="nivel1">
+       <DIV class="nivel2">
+<!--  Contenido Principal         -->
+    <form action="" method="post" name="registro">
+ <fieldset class="form">
+  <legend>Criterios de Busqueda</legend>
+     <table align="center">
+          <tr>
+           <td  class="categoria">N° Factura:</td>
+           <td>
+			<input name="factura" type="text" id="factura"  value="" onkeypress="return acessoNumerico(event)"  />
+		  </td>
+           <td  class="categoria">serial C. :</td>
+           <td>
+             <input name="sercarveh" type="text" id="sercarveh" value="" onblur="javascript:this.value=this.value.toUpperCase()" size="20" maxlength="18" />
+          </td>
+           <td valign="top" class="categoria" > Desde: </td>
+               <td  class="dato" >
+	               <input name="fec" type="text" id="fec"  onblur="javascript:this.value=this.value.toUpperCase()" value="" size="10" maxlength="10" readonly/>
+	               <img src="../images/cal.gif" width="16" height="16" onClick="show_calendar('document.forms[0].fec',document.forms[0].fec.value)" />
+               </td>
+               <td class="categoria" > Hasta: </td>
+               <td class="dato" >
+                   <input name="fec2" type="text" id="fec2"  onblur="javascript:this.value=this.value.toUpperCase()" value="" size="10" maxlength="10" readonly/>
+                   <img src="../images/cal.gif" width="16" height="16" onClick="show_calendar('document.forms[0].fec2',document.forms[0].fec2.value)" />
+               </td>
+          </tr>
+           <tr>
+           <td  class="categoria">cod Beneficiario:</td>
+           <td>
+			<input name="codpro" type="text" id="codpro"  value="" />
+		  </td>
+           <td  class="categoria">Nombre Beneficiario :</td>
+           <td  class="dato">
+             <input name="nombre" type="text" id="nombre" value="" onblur="javascript:this.value=this.value.toUpperCase()" size="20" maxlength="18" />
+          </td>
+          	<td  class="categoria">Días:</td>
+	        <td class="dato"  >
+               <input name="dia" type="text" id="dia" value="<?php if ($dia) echo $dia; else echo '5';?>"   size="7" maxlength="5" />
+	        </td>
+	        <td colspan="2">Menor Igual
+		        <input type="radio" name="sig" id="sig"  value="1" <?php if ($sig=='1' or $sig!='2') echo "checked= 'true'"?>/>
+		         Igual
+		        <input type="radio" name="sig" id="sig"  value="2" <?php if ($sig=='2') echo "checked= 'true'"?>/>
+	        </td>
+          </tr>
+          <tr>
+            <td align="center" colspan="6" >
+            <input type="submit" value="Buscar" onclick="enviar(1)"/>
+            <input type="submit" onclick="enviar(2)" value="Limpiar"/>
+            <INPUT type="hidden" name="indBusq">
+		    <INPUT type="hidden"  name="indReg" >
+		    <INPUT type="hidden" name="idUsu" >
+           </td>
+          </tr>
+  </table>
+  </fieldset>
+
+ <fieldset class="form">
+  <legend>Alertas de Facturas Proximas a Vencer &nbsp; <?php echo 'Total: '.$contArt?></legend>
+    <table width="90%" align="center" class="detalles">
+             <tr>
+              <td class="cabecera">N° de Factura</td>
+              <td class="cabecera">Serial</td>
+              <td class="cabecera">Cod. Ben</td>
+              <td class="cabecera">Beneficiario</td>
+              <td class="cabecera">Condicion Pago</td>
+              <td class="cabecera">Banco</td>
+              <td class="cabecera">Estatus</td>
+              <td class="cabecera">Usuario</td>
+              <td class="cabecera">Fecha Reg</td>
+              <td class="cabecera">Fecha Ven.</td>
+              <td class="cabecera">Días Trans.</td>
+              <td class="cabecera">Días Restant.</td>
+              <?php if ($_SESSION['tipoUsuario'] != 5 and $_SESSION['tipoUsuario'] != 6 and $_SESSION['tipoUsuario'] != 7 and $_SESSION['tipoUsuario']!= 11) { ?>
+              <td class="cabecera"> M </td>
+              <td class="cabecera"> I </td>
+              <td class="cabecera"> V </td>
+               <?php } ?>
+             </tr>
+<?php
+        for($i=0;$i<count($listarFactura);$i+=12){
+          if($listarFactura[$i]){
+             if(!$indC){
+                 $color ='datosimpar';
+                 $indC = true;
+             }
+             else{
+                 $color ='datospar';
+                 $indC = false;
+             }
+?>
+
+              <tr class="<?php echo $color ?>">
+               <td align="center"><?php echo str_pad($listarFactura[$i],5,'0',STR_PAD_LEFT)  ?></td>
+               <td><?php  echo $listarFactura[$i+1];?> </td>
+               <td><?php echo $listarFactura[$i+2]?></td>
+               <td><?php echo $listarFactura[$i+3]?> </td>
+               <td align="center" ><?php echo $listarFactura[$i+4]?></td>
+               <td align="center" ><?php echo $listarFactura[$i+5]?></td>
+               <td align="center" ><?php echo $listarFactura[$i+6]?></td>
+               <td align="center" ><?php echo $listarFactura[$i+7]?></td>
+               <td align="center" ><?php echo $listarFactura[$i+8]?></td>
+               <td align="center" ><?php echo $listarFactura[$i+9]?></td>
+               <td align="center" ><?php echo $listarFactura[$i+10]?></td>
+               <?php if($listarFactura[$i+11]<0) $colorv='venc'?>
+               <td align="center" class="<?php echo $colorv ?>" ><?php echo $listarFactura[$i+11]?></td>
+               <?php if ($_SESSION['tipoUsuario'] != 5 and $_SESSION['tipoUsuario'] != 6 and $_SESSION['tipoUsuario'] != 7 and $_SESSION['tipoUsuario']!= 11) { ?>
+               <td><div align="center">
+               <a class="vinculo" href="reg_factura.php?idfactura=<?php echo $listarFactura[$i]?>&tip=<?php echo $tipo; ?>">
+	              <img src="botones/modificar.png" width="35" height="35">
+	          </a></div></td>
+	          <td><div align="center">
+               <a class="vinculo" href="" target="_blank" onClick="popup('reportes/pdffactura.php?idfactura=<?php echo $listarFactura[$i]?>&tip=<?php echo $tipo; ?>');return false;">
+	              <img src="botones/printer_48.png" width="35" height="35">
+	          </a></div></td>
+	           <td><div align="center">
+               <a class="vinculo" href="det_factura.php?idfactura=<?php echo $listarFactura[$i]?>&tip=<?php echo $tipo; ?>">
+	              <img src="botones/buscar.png" width="35" height="35">
+	          </a></div></td>
+	           <?php } ?>
+              </tr>
+<?php     }
+        }
+?>
+   <tr><td colspan=9> <?php echo 'Total: '.$contArt?></td></tr>
+    </table>
+</fieldset>
+
+<BR>
+ <div align="center">
+       <?php if($pgActual>1){?>
+         <img src="imagenes/atras.png" width="20" height="15" class="vinculo" onclick="regresaPg()">
+       <?php }
+         for($j=$pgIni;$j<=$pgFin;$j++){
+             if($pgActual == $j) $claseVinc = 'vinculoAzul';
+             else $claseVinc = 'vinculo';
+       ?>
+          <a class="<?php echo $claseVinc ?>" onclick="enviaPg(<?php echo $j ?>)"><?php echo $j ?></a>
+       <?php
+         }
+         if($pgActual<$pgFin){
+       ?>
+         <img src="imagenes/adelante.png" width="20" height="15"  class="vinculo" onclick="avanzaPg()">
+       <?php } ?>
+       <BR>
+       <input type="hidden" name="orden" />
+       <input type="hidden" name="codProv" />
+       <input type="hidden" name="pagina" value="<?php echo $pgActual ?>"/>
+
+       <br />
+     </div>
+     <div align="center" >
+        <input type="button" onclick="window.close()" value="Cerrar Ventana"/>
+     </div>
+    </form>
+<!--  FIN Contenido Principal         -->
+       </DIV>
+      </DIV>
+     </TD>
+    </TR>
+    <TR>
+     <TD class="piedepagina">
+      <?php include("piedepagina.php") ?>
+     </TD>
+    </TR>
+   </TABLE>
+  </body>
+</html>
