@@ -807,8 +807,8 @@ function NUM(s, dec) {
             <?php } if ($listarBeneficiario[$i]) { ?>
             <INPUT type="button" id="regDoc" value="Reg. Devolucion" onclick="popup('regDocumentos.php?ci=<?php echo $listarBeneficiario[$i]; ?>&tip=<?php echo $listarBeneficiario[$i+35]; ?>')">
           
-            <!--  <input name="Modificar" type="button" id="Modificar" onclick="validarCaract('2'); return false" value="Modificar" />
-            <?php } ?>-->
+            <!--  <input name="Modificar" type="button" id="Modificar" onclick="validarCaract('2'); return false" value="Modificar" />   -->
+            <?php } ?>
             <input name="listar" type="button" id="listar" onclick="window.location.href='listado_beneficiariosExp.php'" value="Listar" />
          </div>
      </tr>
