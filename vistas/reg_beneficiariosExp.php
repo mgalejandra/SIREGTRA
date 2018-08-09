@@ -311,7 +311,7 @@ if (document.form1.nom1.value.length==0){
    return (false);}
  }
 
-
+/*
 if (document.form1.nom2.value.length==0){
   alert("Debe Ingresar el Nro de la Nota de Debito");
   document.form1.nom2.focus()
@@ -322,7 +322,7 @@ if (document.form1.ape1.value.length<=19){
     alert("Debe Ingresar 20 digitos en el  Numero de Cuenta");
     document.form1.ape1.focus()
     return (false);
-    }
+    }*/
 
 
 opciones = document.getElementsByName("tipo");
@@ -472,6 +472,76 @@ if (document.form1.obspro.value.length<5){
     document.form1.indReg.value = dato;
     document.form1.submit();
     }
+    // La función devuelve el numero formateado
+
+function MASK(form, n, mask, format) {
+  if (format == "undefined") format = false;
+  if (format || NUM(n)) {
+    dec = 0, point = 0;
+    x = mask.indexOf(".")+1;
+    if (x) { dec = mask.length - x; }
+
+    if (dec) {
+      n = NUM(n, dec)+"";
+      x = n.indexOf(".")+1;
+      if (x) { point = n.length - x; } else { n += "."; }
+    } else {
+      n = NUM(n, 0)+"";
+    } 
+    for (var x = point; x < dec ; x++) {
+      n += "0";
+    }
+    x = n.length, y = mask.length, XMASK = "";
+    while ( x || y ) {
+      if ( x ) {
+        while ( y && "#0.".indexOf(mask.charAt(y-1)) == -1 ) {
+          if ( n.charAt(x-1) != "-")
+            XMASK = mask.charAt(y-1) + XMASK;
+          y--;
+        }
+        XMASK = n.charAt(x-1) + XMASK, x--;
+      } else if ( y && "Bsf0".indexOf(mask.charAt(y-1))+1 ) {
+        XMASK = mask.charAt(y-1) + XMASK;
+      }
+      if ( y ) { y-- }
+    }
+  } else {
+     XMASK="";
+  }
+  if (form) { 
+    form.value = XMASK;
+    if (NUM(n)<0) {
+      form.style.color="#FF0000";
+    } else {
+      form.style.color="#000000";
+    }
+  }
+  return XMASK;
+}
+
+// Convierte una cadena alfanumérica a numérica (incluyendo formulas aritméticas)
+//
+// s   = cadena a ser convertida a numérica
+// dec = numero de decimales a redondear
+//
+// La función devuelve el numero redondeado
+
+function NUM(s, dec) {
+  for (var s = s+"", num = "", x = 0 ; x < s.length ; x++) {
+    c = s.charAt(x);
+    if (".-+/*".indexOf(c)+1 || c != " " && !isNaN(c)) { num+=c; }
+  }
+  if (isNaN(num)) { num = eval(num); }
+  if (num == "")  { num=0; } else { num = parseFloat(num); }
+  if (dec != undefined) {
+    r=.5; if (num<0) r=-r;
+    e=Math.pow(10, (dec>0) ? dec : 0 );
+    return parseInt(num*e+r) / e;
+  } else {
+    return num;
+  }
+}
+
     </script>
   </head>
   <body class="pagina">
@@ -562,7 +632,7 @@ if (document.form1.obspro.value.length<5){
         <td class="dato">
          <input name="nom1" type="text" id="nom1" onblur="javascript:this.value=this.value.toUpperCase()" value="<?php if($ban==1)  echo $listarBeneficiario[$i+1]; if($nom1_) if($seni)  echo $nom1_;?>" size="30" maxlength="30" />
         </td>
-         <td class="categoria">*Nro de Nota de Debito:</td>
+         <td class="categoria">Nro de Nota de Debito:</td>
         <td class="dato">
          <input name="nom2" type="text" id="nom2" onblur="javascript:this.value=this.value.toUpperCase()" value="<?php if($ban==1)  echo $listarBeneficiario[$i+2]; if($nom2_)  if($seni)  echo $nom2_;?>" size="30" maxlength="30"/>
         </td>
@@ -649,7 +719,7 @@ if (document.form1.obspro.value.length<5){
 
         <td class="categoria">*Monto:</td>
         <td class="dato">
-         <input name="urb" type ="text" id="urb" onkeypress="return acessoNumerico(event)" value="<?php if($ban==1)  echo $listarBeneficiario[$i+8];?>" size="30" maxlength="30" />
+          <input name="urb" type ="text" id="urb" onchange="MASK(this,this.value,'-Bsf ##,###,##0.00',1)"value="<?php if($ban==1)  echo $listarBeneficiario[$i+8];?>" size="30" maxlength="30" />
         </td>
       </tr>
       <tr>
@@ -737,7 +807,8 @@ if (document.form1.obspro.value.length<5){
             <?php } if ($listarBeneficiario[$i]) { ?>
             <INPUT type="button" id="regDoc" value="Reg. Devolucion" onclick="popup('regDocumentos.php?ci=<?php echo $listarBeneficiario[$i]; ?>&tip=<?php echo $listarBeneficiario[$i+35]; ?>')">
           
-            <?php } ?>
+            <!--  <input name="Modificar" type="button" id="Modificar" onclick="validarCaract('2'); return false" value="Modificar" />
+            <?php } ?>-->
             <input name="listar" type="button" id="listar" onclick="window.location.href='listado_beneficiariosExp.php'" value="Listar" />
          </div>
      </tr>
