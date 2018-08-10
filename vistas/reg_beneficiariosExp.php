@@ -74,7 +74,7 @@ $indErr = false;
   $riflab=$_POST['riflab'];
   $deslab=$_POST['deslab'];
   $correo=$_POST['correo'];
-  //$ced=$_POST['ced'];
+  $id_pro=$_POST['id_pro'];
 
 
 
@@ -83,7 +83,7 @@ else
 $idbenefi=$rif;
 
   $datos = array($rif,$nom1,$nom2,$ape1,$ape2,$nomorg,$nomcom,$calle,$urb,$casa,$piso,$apart,$dist,$tlf1,$tlf2,$obspro,$estado,
-                 $municipio,$parroquia,$tipo,$sexo,$fecnac,$ced,$banco,$correo,$riflab,$deslab);
+                 $municipio,$parroquia,$tipo,$sexo,$fecnac,$ced,$banco,$correo,$riflab,$deslab,$id_pro);
 
   $fecact=date('d/m/Y');
   $hora=date('H:i:s');
@@ -113,7 +113,7 @@ if ($indReg==1){
 
   if ($registro)  {
      echo "<script>alert('Transferencia  Registrada, Registre el estatus Devolucion en caso de ser necesario');</script>";
-  //   echo "<SCRIPT>window.location.href='listado_beneficiarios.php';</SCRIPT>";
+  //  echo "<SCRIPT>window.location.href='listado_beneficiarios.php';</SCRIPT>";
     //  $listarBeneficiario=$objBeneficiario->listarBeneficiario($idbenefi,$nomcom,$banco,'','');
       $listarBeneficiario=$objBeneficiario->listarBeneficiario($idbenefi,$nomcom,$banco,'','','','1');
   }
@@ -123,8 +123,8 @@ if ($indReg==2){
   //echo 'entro: '.count($datos);
   $modificar = $objBeneficiario->modificarBeneficiario($idbenefi,$datos);
   if ($modificar)   {
-       echo "<script>alert('Datos del Ordenante Modificado');</script>";
-     echo "<SCRIPT>window.location.href='listado_beneficiariosExp.php';</SCRIPT>";
+     echo "<script>alert('Datos del Ordenante Modificado');</script>";
+   echo "<SCRIPT>window.location.href='listado_beneficiariosExp.php';</SCRIPT>";
 
     $_SESSION['nac']=null;
       $_SESSION['numrif']=null;
@@ -711,7 +711,7 @@ function NUM(s, dec) {
       <tr>
         <td class="categoria">*Numero de Cuenta Beneficiario:</td>
         <td class="dato">
-            <input name="calle" type="text" id="calle" onkeypress="return acessoNumerico(event)" value="<?php if($ban==1)  echo $listarBeneficiario[$i+3]; if($ape1_)  if($seni)  echo $calle;?>" size="20" maxlength="20"/>
+            <input name="calle" type="text" id="calle" onkeypress="return acessoNumerico(event)" value="<?php if($ban==1)  echo $listarBeneficiario[$i+7]; if($ape1_)  if($seni)  echo $calle;?>" size="20" maxlength="20"/>
         
         </td>
 
@@ -719,7 +719,7 @@ function NUM(s, dec) {
 
         <td class="categoria">*Monto:</td>
         <td class="dato">
-          <input name="urb" type ="text" id="urb" onchange="MASK(this,this.value,'-Bsf ##,###,##0.00',1)"value="<?php if($ban==1)  echo $listarBeneficiario[$i+8];?>" size="30" maxlength="30" />
+          <input name="urb" type ="text" id="urb" onchange="MASK(this,this.value,'-Bsf ##,##,##,###,##0.00',1)"value="<?php if($ban==1)  echo $listarBeneficiario[$i+8];?>" size="30" maxlength="30" />
         </td>
       </tr>
       <tr>
@@ -807,7 +807,7 @@ function NUM(s, dec) {
             <?php } if ($listarBeneficiario[$i]) { ?>
             <INPUT type="button" id="regDoc" value="Reg. Devolucion" onclick="popup('regDocumentos.php?ci=<?php echo $listarBeneficiario[$i]; ?>&tip=<?php echo $listarBeneficiario[$i+35]; ?>')">
           
-            <!--  <input name="Modificar" type="button" id="Modificar" onclick="validarCaract('2'); return false" value="Modificar" />   -->
+             <input name="Modificar" type="button" id="Modificar" onclick="validarCaract('2'); return false" value="Modificar" />   
             <?php } ?>
             <input name="listar" type="button" id="listar" onclick="window.location.href='listado_beneficiariosExp.php'" value="Listar" />
          </div>

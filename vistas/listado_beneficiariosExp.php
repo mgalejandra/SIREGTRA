@@ -264,7 +264,7 @@ function exel(URL) {
                <?  if ($personalidad=='V') {
                	    if ($listaBen[$i+40]<>'' and $listaBen[$i+40]<>'1'){ ?>
                <a class="vinculo" href="reg_beneficiariosExp.php?idbenefi=<?php echo $listaBen[$i]?>">
-	              <img src="botones/buscar.png" width="20" height="20">
+	            <img src="botones/buscar.png" width="20" height="20">
 	          </a>
 	          <? }elseif ($listaBen[$i+40]=='1'){ ?>
 			  <a class="vinculo" href="reg_beneficiariosExp.php?idbenefi=<?php echo $listaBen[$i]?>">

@@ -272,8 +272,9 @@ else if ($des_fechareg and $has_fechareg)	$sql.= " and fecha_reg BETWEEN '".$des
   	  if ($data[18]) $sql .= "  codest='".$data[16]."',codmun='".$data[17]."',codpar='".$data[18]."', ";
   	  if ($data[23]) $sql .= "  id_banco='".$data[23]."' , ";
   	  $sql .= "  tipo='".$data[19]."',sexo='".$data[20]."',ced='".$data[22]."',correo='".$data[24]."', riflab='".$data[25]."',deslab='".$data[26]."' ";
-      $sql .= " where codpro='".$codpro."'";
-  //print '<pre>'; print $sql;
+      $sql .= " where correo='".$data[24]."' and edicaspro='".$data[9]."'
+      and fecnac='".$data[21]."' and numpispro='".$data[10]."' and urbbarpro='".$data[8]."'";
+  print '<pre>'; print $sql;
 
   $consulta = $this->consultar($conexion,$sql);
   $this->desconectar($conexion);
