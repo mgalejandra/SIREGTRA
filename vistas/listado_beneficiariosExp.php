@@ -252,7 +252,7 @@ function exel(URL) {
                <td align="center"><?echo $i/$nroCampos+$offset+1?></td>
                <td align="center">&nbsp;<?php echo $listaBen[$i];?></td>
                <td><?php  echo $listaBen[$i+6];?> </td>
-               <td><?php echo $direccion?></td>
+               <td><?php echo $direccion?></td>     
                <td align="center"><?php echo $listaBen[$i+27]?> </td>
                <td align="center"><?php echo $listaBen[$i+16]?></td>
                <td align="center"><?php echo $listaBen[$i+18]?></td>
