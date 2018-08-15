@@ -5,7 +5,6 @@ require('../controlador/funciones.php');
 require('../modelos/beneficiario.php');
 require('../modelos/zona.php');
 require('../modelos/pago.php');
-
 $objBeneficiario = new beneficiario();
 $objPago    = new pago();
 $host = $_SERVER["HTTP_HOST"];
@@ -13,7 +12,7 @@ $aux = explode('/',$_SERVER["REQUEST_URI"]);
 $uri='';
 for ($i=0;$i<count($aux);$i++)$uri = $uri.$aux[$i]."/";
 $dir='http://'.$host.$uri;
-$permitidos = array(2,3,4);
+$permitidos = array(1,2,3,4,11,13,14,15,17,25);
 validaAcceso($permitidos,$dir);
 $ban=0;
 $indReg=$_POST['indReg'];
@@ -43,8 +42,8 @@ $indErr = false;
 
   if($_POST['numrifSS']=='') $numrifSS='';
 
-  $numrif=str_pad($_POST['numrif'],8,'0',STR_PAD_LEFT) ;
-  $digrif=str_pad($_POST['digrif'],1,'0',STR_PAD_LEFT) ;
+  $numrif=str_pad($_POST['numrif'],9,'0',STR_PAD_LEFT) ;
+  $digrif=str_pad($_POST['digrif'],6,'0',STR_PAD_LEFT) ;
   $ced=$numrif;
   $rif=$nac.$numrif.$digrif;
   $nom1=$_POST['nom1'];
@@ -74,16 +73,17 @@ $indErr = false;
   $riflab=$_POST['riflab'];
   $deslab=$_POST['deslab'];
   $correo=$_POST['correo'];
-  $id_pro=$_POST['id_pro'];
+  //$ced=$_POST['ced'];
 
 
 
 if ($_GET['idbenefi']) $idbenefi=$_GET['idbenefi'];
+
 else
 $idbenefi=$rif;
 
   $datos = array($rif,$nom1,$nom2,$ape1,$ape2,$nomorg,$nomcom,$calle,$urb,$casa,$piso,$apart,$dist,$tlf1,$tlf2,$obspro,$estado,
-                 $municipio,$parroquia,$tipo,$sexo,$fecnac,$ced,$banco,$correo,$riflab,$deslab,$id_pro);
+                 $municipio,$parroquia,$tipo,$sexo,$fecnac,$ced,$banco,$correo,$riflab,$deslab);
 
   $fecact=date('d/m/Y');
   $hora=date('H:i:s');
@@ -101,7 +101,7 @@ if ($indReg==1){
   //echo 'entro: '.count($datos);}
   $listarBeneficiario=$objBeneficiario->listarBeneficiario($idbenefi,$nomcom,$banco,'','','','1');
 
-   if ($listarBeneficiario[0]=''){
+   if ($listarBeneficiario[0]!=''){
          $ban=1;
          $i=0;
        echo "<script>alert('Esta CI/RIF: ".$listarBeneficiario[0]." pertenece a : ".$listarBeneficiario[6]."');</script>";
@@ -112,8 +112,8 @@ if ($indReg==1){
   }
 
   if ($registro)  {
-     echo "<script>alert('Transferencia  Registrada, Registre el estatus Devolucion en caso de ser necesario');</script>";
-  //  echo "<SCRIPT>window.location.href='listado_beneficiarios.php';</SCRIPT>";
+     echo "<script>alert('Beneficiario Registrado, Registre la Documentación');</script>";
+  //   echo "<SCRIPT>window.location.href='listado_beneficiarios.php';</SCRIPT>";
     //  $listarBeneficiario=$objBeneficiario->listarBeneficiario($idbenefi,$nomcom,$banco,'','');
       $listarBeneficiario=$objBeneficiario->listarBeneficiario($idbenefi,$nomcom,$banco,'','','','1');
   }
@@ -123,31 +123,17 @@ if ($indReg==2){
   //echo 'entro: '.count($datos);
   $modificar = $objBeneficiario->modificarBeneficiario($idbenefi,$datos);
   if ($modificar)   {
-     echo "<script>alert('Datos del Ordenante Modificado');</script>";
-   echo "<SCRIPT>window.location.href='listado_beneficiariosExp.php';</SCRIPT>";
+       echo "<script>alert('Beneficiario Modificado');</script>";
+     echo "<SCRIPT>window.location.href='listado_beneficiariosExp.php';</SCRIPT>";
 
-    $_SESSION['nac']=null;
+     $_SESSION['nac']=null;
       $_SESSION['numrif']=null;
       $_SESSION['digrif']=null;
       $_SESSION['banco']=null;
   }
 }
 
-if($indReg == 4){
-  //echo 'entro2';
-  $ban=1;
-  $i=0;
-  $_SESSION['nac']=$_POST['nac'];
-    $_SESSION['numrif'] =str_pad($_POST['numrif'],8,'0',STR_PAD_LEFT) ;
-    $_SESSION['digrif']=str_pad($_POST['digrif'],1,'0',STR_PAD_LEFT) ;
-    $_SESSION['banco']=$_POST['banco'];
-    $rif=$_SESSION['nac'].$_SESSION['numrif'].$_SESSION['digrif'];
-  $listarBeneficiario=$objBeneficiario->listarBeneficiario($rif,'','');
-  if ($listarBeneficiario)   {
-       echo "<script>alert('El Beneficiario ya se encuentra Registrado');</script>";
-  }
 
-}
 
 $_SESSION['numben'] = $listarBeneficiario[$i+19].$listarBeneficiario[$i+20].$listarBeneficiario[$i+21];
 
@@ -161,7 +147,41 @@ if ($listarBeneficiario[$i+40]) $datoslistarBancos=$objPago->listarBancos(4,$lis
 if ($_SESSION['banco'] and !$listarBeneficiario[$i+40]) $datoslistarBancos=$objPago->listarBancos(4,$_SESSION['banco']);
 
 
+///////////////buscar en seniat
 
+if($indReg=='S' ){
+
+                    $datosSaime=$objBeneficiario->consultarSaime($numrifSS);
+          $contenido=file_get_contents("http://contribuyente.seniat.gob.ve/BuscaRif/BuscaRif.jsp?p_cedula=$numrifSS");
+          $contenido1=  explode("<!-- VISUALIZAR RIF -->", $contenido);
+          $contenido2=  explode('<b><font face="Verdana" size="2">', $contenido1[1]);
+          $contenido3=  explode('&nbsp;', $contenido2[1]);
+          $contenido4=  explode('</b></font>', $contenido3[1]);
+
+          $cedula=$contenido3[0]; //cedula
+          if($cedula) $seni=true; else $seni=0;
+          $nombrecompleto= $contenido4[0]; //nombre
+
+          $nombreSeparado=  explode(' ',$nombrecompleto);
+
+          $nacs=substr($cedula,0,1);
+          $cedu=substr($cedula,1,8);
+          $dig=substr($cedula,9,1);
+
+          $nom1_=$nombreSeparado[0];
+          $nom2_=$nombreSeparado[1];
+          $ape1_=$nombreSeparado[2];
+          $ape2_=$nombreSeparado[3];
+
+          if(count($nombreSeparado)==2)
+          {
+            $nom1_=$nombreSeparado[0];
+            $ape1_=$nombreSeparado[1];
+            $nom2_='';
+            $ape2_='';
+          }
+
+}else  $seni=false;
 //////////////////fin de buscar seniat
 ?>
 <!DOCTYPE HTML PUBLIC >
@@ -272,8 +292,8 @@ if (document.form1.numrif.value.length==0){
     return (false);
     }
 
-if (document.form1.numrif.value.length<=6){
-    alert("Debe Ingresar mínimo 7 dígitos");
+if (document.form1.numrif.value.length==0){
+    alert("Debe Ingresar mínimo 8 dígitos");
     document.form1.numrif.focus()
     return (false);
     }
@@ -384,11 +404,11 @@ if (document.form1.urb.value.length==0){
 
 
 
-if (document.form1.casa.value.length==0){
+/*if (document.form1.casa.value.length==0){
     alert("Debe Ingresar el Nro Doc/Referencia");
     document.form1.casa.focus()
     return (false);
-    }
+    }*/
 
 
 if (document.form1.piso.value.length==0){
@@ -578,11 +598,19 @@ function NUM(s, dec) {
       <tr>
         <td colspan="4" class="cabecera">Registrar  Datos del Ordenante </td>
       </tr>
+
+       <tr>
+        <td class="categoria">*Correlativo:</td>
+        <td class="dato">
+          <input name="digrif" type="text" id="digrif" value="<?php if($ban==1)  echo $listarBeneficiario[$i+21];?>" size="7" maxlength="7"/>
+       </td>
+      </tr>
         <tr>
         <td class="categoria">*RIF / CI:</td>
         <td class="dato" >
         <select name="nac" size="1" id="nac">
-    <?php if($ban==1)  echo " <option value=".$listarBeneficiario[$i+19].">".$listarBeneficiario[$i+19]."</option>";?>
+    <?php if($ban==1)  echo " <option value=".$listarBeneficiario[$i+19].">".$listarBeneficiario[$i+19]."
+    </option>";?>
           <option value="V">V</option>
           <option value="J">J</option>
           <option value="G">G</option>
@@ -592,12 +620,10 @@ function NUM(s, dec) {
 
           </select>
           -
-          <input name="numrif" type="text" id="numrif" onkeypress="return acessoNumerico(event)" value="<?php  if($ban==1) echo $listarBeneficiario[$i+20];?>" size="12" maxlength="8" />
-          -
-          <input name="digrif" type="text" class="Estilo1" id="digrif" onblur="javascript:this.value=this.value.toUpperCase()" value="<?php if($ban==1)  echo $listarBeneficiario[$i+21];?>"" size="6" maxlength="1" acessonumerico(event)="acessoNumerico(event)" />
+          <input name="numrif" type="text" id="numrif" onkeypress="return acessoNumerico(event)" value="<?php  if($ban==1) echo $listarBeneficiario[$i+20];?>" size="12" maxlength="9" />
+                  </tr>
 
-           </tr>
-      
+       
 
     <td class="categoria">*Fecha del Oficio:</td>
         <td class="dato">
@@ -723,7 +749,7 @@ function NUM(s, dec) {
         </td>
       </tr>
       <tr>
-        <td class="categoria">*Nro Doc/Referencia:</td>
+        <td class="categoria">Nro Referencia de la Pag BCV:</td>
         <td class="dato" >
           <input name="casa" type ="text" id="casa" value="<?php if($ban==1)  echo $listarBeneficiario[$i+9];?>"   onkeypress="return acessoNumerico(event)" size="20" maxlength="20" />
        </td>
@@ -810,6 +836,7 @@ function NUM(s, dec) {
              <input name="Modificar" type="button" id="Modificar" onclick="validarCaract('2'); return false" value="Modificar" />   
             <?php } ?>
             <input name="listar" type="button" id="listar" onclick="window.location.href='listado_beneficiariosExp.php'" value="Listar" />
+            
          </div>
      </tr>
  </table>

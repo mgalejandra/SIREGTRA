@@ -12,7 +12,7 @@ $aux = explode('/',$_SERVER["REQUEST_URI"]);
 $uri='';
 for ($i=0;$i<count($aux);$i++)$uri = $uri.$aux[$i]."/";
 $dir='http://'.$host.$uri;
-$permitidos = array(2,3,4);
+$permitidos = array(1,2,3,4,11,13,14,15,17,25);
 validaAcceso($permitidos,$dir);
 $ban=0;
 $indReg=$_POST['indReg'];
@@ -76,41 +76,41 @@ $idbenefi=$rif;
   $hora=date('H:i:s');
 
 if ($idbenefi and $indReg!=2 and $indReg!='S' and $indReg!=4)  {
-	$ban=1;
-	$i=0;
-	//echo 'entro';
-	$listarBeneficiario=$objBeneficiario->listarBeneficiario($idbenefi,'','','','');
+  $ban=1;
+  $i=0;
+  //echo 'entro';
+  $listarBeneficiario=$objBeneficiario->listarBeneficiario($idbenefi,'','','','');
 }
 
-if ($indReg){
-	//echo 'entro: '.count($datos);}
-	$listarBeneficiario=$objBeneficiario->listarBeneficiario($idbenefi,'','','','');
+if ($indReg==1){
+  //echo 'entro: '.count($datos);}
+  $listarBeneficiario=$objBeneficiario->listarBeneficiario($idbenefi,'','','','');
    if ($listarBeneficiario[0]!=''){
-   	     $ban=1;
-   	     $i=0;
-	     echo "<script>alert('Esta CI/RIF: ".$listarBeneficiario[0]." pertenece a : ".$listarBeneficiario[6]."');</script>";
+         $ban=1;
+         $i=0;
+       echo "<script>alert('Esta CI/RIF: ".$listarBeneficiario[0]." pertenece a : ".$listarBeneficiario[6]."');</script>";
    }else
    {
-   	 $registro = $objBeneficiario->registrarBeneficiario($datos);
+     $registro = $objBeneficiario->registrarBeneficiario($datos);
 
   }
 
-	if ($registro)  {
-		 echo "<script>alert('Beneficiario Registrado, Registre la Documentación');</script>";
-	//	 echo "<SCRIPT>window.location.href='listado_beneficiarios.php';</SCRIPT>";
-	  // $listarBeneficiario=$objBeneficiario->listarBeneficiario($idbenefi,'','','','');
-	     $listarBeneficiario=$objBeneficiario->listarBeneficiario($idbenefi,'','','','','','1');
-	}
+  if ($registro)  {
+     echo "<script>alert('Beneficiario Registrado, Registre la Documentación');</script>";
+  //   echo "<SCRIPT>window.location.href='listado_beneficiarios.php';</SCRIPT>";
+    // $listarBeneficiario=$objBeneficiario->listarBeneficiario($idbenefi,'','','','');
+       $listarBeneficiario=$objBeneficiario->listarBeneficiario($idbenefi,'','','','','','1');
+  }
 }
 
-if ($indReg){
-	//echo 'entro: '.count($datos);
-	$modificar = $objBeneficiario->modificarBeneficiario($idbenefi,$datos);
-	if ($modificar)   {
-	     echo "<script>alert('Beneficiario Modificado');</script>";
-		 //echo "<SCRIPT>window.location.href='listado_beneficiarios.php';</SCRIPT>";
-		 echo "<SCRIPT>window.location.href='listado_beneficiariosExp.php';</SCRIPT>";
-	}
+if ($indReg==2){
+  //echo 'entro: '.count($datos);
+  $modificar = $objBeneficiario->modificarBeneficiario($idbenefi,$datos);
+  if ($modificar)   {
+    //   echo "<script>alert('Beneficiario Modificado');</script>";
+     //echo "<SCRIPT>window.location.href='listado_beneficiarios.php';</SCRIPT>";
+   //  echo "<SCRIPT>window.location.href='listado_beneficiariosExp.php';</SCRIPT>";
+  }
 }
 
 $_SESSION['numben'] = $listarBeneficiario[$i+19].$listarBeneficiario[$i+20].$listarBeneficiario[$i+21];
@@ -126,35 +126,35 @@ $buscarParroquia = $objZona->buscarParroquias($listarBeneficiario[38],$listarBen
 if($indReg=='S' ){
 
                     $datosSaime=$objBeneficiario->consultarSaime($numrifSS);
-					$contenido=file_get_contents("http://contribuyente.seniat.gob.ve/BuscaRif/BuscaRif.jsp?p_cedula=$numrifSS");
-					$contenido1=  explode("<!-- VISUALIZAR RIF -->", $contenido);
-					$contenido2=  explode('<b><font face="Verdana" size="2">', $contenido1[1]);
-					$contenido3=  explode('&nbsp;', $contenido2[1]);
-					$contenido4=  explode('</b></font>', $contenido3[1]);
+          $contenido=file_get_contents("http://contribuyente.seniat.gob.ve/BuscaRif/BuscaRif.jsp?p_cedula=$numrifSS");
+          $contenido1=  explode("<!-- VISUALIZAR RIF -->", $contenido);
+          $contenido2=  explode('<b><font face="Verdana" size="2">', $contenido1[1]);
+          $contenido3=  explode('&nbsp;', $contenido2[1]);
+          $contenido4=  explode('</b></font>', $contenido3[1]);
 
-					$cedula=$contenido3[0]; //cedula
-					if($cedula) $seni=true; else $seni=false;
-					$nombrecompleto= $contenido4[0]; //nombre
+          $cedula=$contenido3[0]; //cedula
+          if($cedula) $seni=true; else $seni=false;
+          $nombrecompleto= $contenido4[0]; //nombre
 
-					$nombreSeparado=  explode(' ',$nombrecompleto);
+          $nombreSeparado=  explode(' ',$nombrecompleto);
 
 
-					$nacs=substr($cedula,0,1);
-					$cedu=substr($cedula,1,8);
-					$dig=substr($cedula,9,1);
+          $nacs=substr($cedula,0,1);
+          $cedu=substr($cedula,1,8);
+          $dig=substr($cedula,9,1);
 
-					$nom1_=$nombreSeparado[0];
-					$nom2_=$nombreSeparado[1];
-					$ape1_=$nombreSeparado[2];
-					$ape2_=$nombreSeparado[3];
+          $nom1_=$nombreSeparado[0];
+          $nom2_=$nombreSeparado[1];
+          $ape1_=$nombreSeparado[2];
+          $ape2_=$nombreSeparado[3];
 
-					if(count($nombreSeparado)==2)
-					{
-						$nom1_=$nombreSeparado[0];
-						$ape1_=$nombreSeparado[1];
-						$nom2_='';
-						$ape2_='';
-					}
+          if(count($nombreSeparado)==2)
+          {
+            $nom1_=$nombreSeparado[0];
+            $ape1_=$nombreSeparado[1];
+            $nom2_='';
+            $ape2_='';
+          }
 
 }else  $seni=false;
 //////////////////fin de buscar seniat
@@ -183,64 +183,64 @@ refresco=setTimeout("rotulo_title( )",espera);}
 
 <script type="text/javascript">
 $(document.form1).ready(function(){
-	cargar_paises();
-	$("#pais").change(function(){dependencia_estado();});
-	$("#estado").change(function(){dependencia_ciudad();});
-	$("#estado").attr("disabled",true);
-	$("#ciudad").attr("disabled",true);
+  cargar_paises();
+  $("#pais").change(function(){dependencia_estado();});
+  $("#estado").change(function(){dependencia_ciudad();});
+  $("#estado").attr("disabled",true);
+  $("#ciudad").attr("disabled",true);
 });
 
 function cargar_paises()
 {
 
-	$.get("../modelos/cargar-paises.php", function(resultado){
-		if(resultado == false)
-		{
-			alert("Error: Seleccione un estado");
-		}
-		else
-		{
-			$('#pais').append(resultado);
-		}
-	});
+  $.get("../modelos/cargar-paises.php", function(resultado){
+    if(resultado == false)
+    {
+      alert("Error: Seleccione un estado");
+    }
+    else
+    {
+      $('#pais').append(resultado);
+    }
+  });
 }
 function dependencia_estado()
 {
-	var code = $("#pais").val();
-	$.get("../modelos/dependencia-estado.php", { code: code },
-		function(resultado)
-		{
-			if(resultado == false)
-			{
-				alert("Error: Seleccione un municipio");
-			}
-			else
-			{
-				$("#estado").attr("disabled",false);
-				document.getElementById("estado").options.length=1;
-				$('#estado').append(resultado);
-			}
-		}
+  var code = $("#pais").val();
+  $.get("../modelos/dependencia-estado.php", { code: code },
+    function(resultado)
+    {
+      if(resultado == false)
+      {
+        alert("Error: Seleccione un municipio");
+      }
+      else
+      {
+        $("#estado").attr("disabled",false);
+        document.getElementById("estado").options.length=1;
+        $('#estado').append(resultado);
+      }
+    }
 
-	);
+  );
 }
 
 function dependencia_ciudad()
 {
-	var code1 = $("#pais").val();
-	var code = $("#estado").val();
-	$.get("../modelos/dependencia-ciudades.php?", { code: code , code1: code1 },function(resultado){
-		if(resultado == false)
-		{
-			alert("Error: Seleccione una parroquia");
-		}
-		else
-		{
-			$("#ciudad").attr("disabled",false);
-			document.getElementById("ciudad").options.length=1;
-			$('#ciudad').append(resultado);
-		}
-	});
+  var code1 = $("#pais").val();
+  var code = $("#estado").val();
+  $.get("../modelos/dependencia-ciudades.php?", { code: code , code1: code1 },function(resultado){
+    if(resultado == false)
+    {
+      alert("Error: Seleccione una parroquia");
+    }
+    else
+    {
+      $("#ciudad").attr("disabled",false);
+      document.getElementById("ciudad").options.length=1;
+      $('#ciudad').append(resultado);
+    }
+  });
 
 }
 
@@ -353,11 +353,11 @@ if (document.form1.ape2.value.length > 0){
     }
    // return ind;
  }
-if (document.form1.riflab.value.length < 10){
+/*if (document.form1.riflab.value.length < 10){
     alert("Debe Ingresar un numero de rif Laboral valido de 10 caracteres");
     document.form1.riflab.focus()
     return (false);
-    }
+    }*/
 
     if (document.form1.riflab.value.substring(0,1)!='J' && document.form1.riflab.value.substring(0,1)!='G'){
     alert("Debe Ingresar un numero de rif Laboral: Juridico ó gubernamental");
@@ -487,10 +487,10 @@ if (document.form1.tlf1.value.length!=7){
 opciones = document.getElementsByName("tipo");
 var seleccionado = false;
 for(var i=0; i<opciones.length; i++) {
-	if(opciones[i].checked)
-	{
-		seleccionado = true;break;
-	}
+  if(opciones[i].checked)
+  {
+    seleccionado = true;break;
+  }
 }
 
 if (seleccionado==false){
@@ -529,16 +529,16 @@ if (document.form1.obspro.value.length<15){
 
 }
 
-	function popup(URL) {
-	  day = new Date();
-	  id = day.getTime();
-	  eval("page" + id + " = window.open(URL, 'URL', 'toolbar=0,scrollbars=1,location=0,statusbar=1,menubar=0,resizable=0,width=400,height=400');");
-	}
-		function enviarDatos(dato){
-	//	alert('entro');
-	//  document.form1.numrif.value='';
- 		document.form1.indReg.value = dato;
- 		document.form1.submit();
+  function popup(URL) {
+    day = new Date();
+    id = day.getTime();
+    eval("page" + id + " = window.open(URL, 'URL', 'toolbar=0,scrollbars=1,location=0,statusbar=1,menubar=0,resizable=0,width=400,height=400');");
+  }
+    function enviarDatos(dato){
+  //  alert('entro');
+  //  document.form1.numrif.value='';
+    document.form1.indReg.value = dato;
+    document.form1.submit();
     }
     </script>
   </head>
@@ -562,7 +562,7 @@ if (document.form1.obspro.value.length<15){
   <form id="form1" name="form1" method="post" action="">
   <table class="formulario" width="822" border="0" align="center" >
       <tr>
-        <td colspan="4" class="cabecera"> Datos del Ordenante </td>
+        <td colspan="4" class="cabecera">Registrar  Datos del Beneficiario </td>
       </tr>
       <tr>
         <td class="categoria">RIF / CI:</td>
@@ -584,12 +584,12 @@ if (document.form1.obspro.value.length<15){
           -
                  <input name="numrifSS" type="text" id="numrifSS" onkeypress="return acessoNumerico(event)"
           value="<?php  if($ban==1) {
-          			if ($_SESSION['numrifSS'])echo $_SESSION['numrifSS'];
-          			else echo $listarBeneficiario[$i+20]; } if($seni) echo $cedu;   else if(!$seni) echo $numrifSS;?>" size="12" maxlength="8"   <?php if($seni)  echo "disabled='true'"; if(!$seni)  {echo 'onblur="enviarDatos('."'S'".')"';  }?>/>
+                if ($_SESSION['numrifSS'])echo $_SESSION['numrifSS'];
+                else echo $listarBeneficiario[$i+20]; } if($seni) echo $cedu;   else if(!$seni) echo $numrifSS;?>" size="12" maxlength="8"   <?php if($seni)  echo "disabled='true'"; if(!$seni)  {echo 'onblur="enviarDatos('."'S'".')"';  }?>/>
           -
               <input type="hidden" name="numrif"  value="<?php  if($ban==1) {
-          			if ($_SESSION['numrif'])echo $_SESSION['numrif'];
-          			else echo $listarBeneficiario[$i+20]; } if($seni) echo $cedu;   else if(!$seni) echo $numrifSS; ?>">
+                if ($_SESSION['numrif'])echo $_SESSION['numrif'];
+                else echo $listarBeneficiario[$i+20]; } if($seni) echo $cedu;   else if(!$seni) echo $numrifSS; ?>">
 
           <input  name="digrif" type="text" class="Estilo1" id="digrif" onblur="javascript:this.value=this.value.toUpperCase()"
           value="<?php if($ban==1) {
@@ -597,90 +597,115 @@ if (document.form1.obspro.value.length<15){
           else echo $listarBeneficiario[$i+21];} if($seni)  echo $dig; ?>"" size="6" maxlength="1" acessonumerico(event)="acessoNumerico(event)" />
 
            </tr>
-  
+   <td class="categoria">Fecha de Nacimiento:</td>
+        <td class="dato">
+         <input name="fecnac" type="text" id="fecnac" size="10"  maxlength="10" date_format="dd/MM/yy"
+         onKeyUp="javascript: mascara(this,'/',Array(2,2,4),true)"value="<?php if($ban==1) echo $listarBeneficiario[$i+39]; if($datosSaime[6]) echo $datosSaime[6];?>"/>
+           <img src="../images/cal.gif" width="16" height="16" onClick="show_calendar('document.forms[0].fecnac',document.forms[0].fecnac.value)" />
+        </td>
 
 
  </td>
-          
+          <td class="categoria">Sexo:</td>
+        <td class="dato">
+          <select name="sexo" size="1" id="sexo">
+          <?php if($ban==1)  echo " <option value=".$listarBeneficiario[$i+33].">".$listarBeneficiario[$i+34]."</option>";?>
+          <option value="F">Femenino</option>
+          <option value="M">Masculino</option>
+          </select>
+        </td>
 
 
 
       </tr>
      <tr>
-        <td class="categoria">*Nombre y Apellido/ Raz&oacute;n Social:</td>
+        <td class="categoria">1er Nombres:</td>
         <td class="dato">
-         <input name="nom1" type="text" id="nom1" onblur="javascript:this.value=this.value.toUpperCase()" value="<?php if($ban==1)  echo $listarBeneficiario[$i+1];?>" size="30" maxlength="30" />
+         <input name="nom1" type="text" id="nom1" onblur="javascript:this.value=this.value.toUpperCase()" value="<?php if($ban==1)  echo $listarBeneficiario[$i+1]; if($nom1_) if($seni)  echo $nom1_;?>" size="30" maxlength="30" />
         </td>
-
+        <td class="categoria">2do Nombre:</td>
+        <td class="dato">
+         <input name="nom2" type="text" id="nom2" onblur="javascript:this.value=this.value.toUpperCase()" value="<?php if($ban==1)  echo $listarBeneficiario[$i+2]; if($nom2_)  if($seni)  echo $nom2_;?>" size="30" maxlength="30"/>
+        </td>
       </tr>
       <tr>
-        <td class="categoria">*Numero de Cuenta Ordenante :</td>
-        <td class="dato" colspan='3'>
-          <input name="nomorg" type="text" id="nomorg"  value="<?php if($ban==1)  echo $listarBeneficiario[$i+5];?>" size="20" maxlength="20"/>
-      
+        <td class="categoria">1er Apellido :</td>
+        <td class="dato" >
+          <input name="ape1" type="text" id="ape1" onblur="javascript:this.value=this.value.toUpperCase()" value="<?php if($ban==1)  echo $listarBeneficiario[$i+3]; if($ape1_)  if($seni)  echo $ape1_;?>" size="30" maxlength="30"/>
+       </td>
+        <td class="categoria">2do Apellido :</td>
+        <td class="dato" >
+          <input name="ape2" type="text" id="ape2"  onblur="javascript:this.value=this.value.toUpperCase()" value="<?php if($ban==1)  echo $listarBeneficiario[$i+4]; if($ape2_)  if($seni) echo $ape2_;?>" size="30" maxlength="30"/>
        </td>
       </tr>
-
+       <tr>
+        <td class="categoria">Correo:</td>
+        <td class="dato" colspan='3'>
+          <input name="correo" type="text" id="correo" value="<?php if($ban==1)  echo $listarBeneficiario[$i+41];?>" size="30" maxlength="50"/>
+       </td>
+      </tr>
+      <!--<tr>
+        <td class="categoria">Organizaci&oacute;n:</td>
+        <td class="dato" colspan='3'>
+          <textarea name="nomorg" cols="60" rows="2" id="nomorg"  onblur="javascript:this.value=this.value.toUpperCase()" ><?php if($ban==1)  echo $listarBeneficiario[$i+5];?> </textarea>
+       </td>
+      </tr>-->
+       <tr>
+        <td colspan="4" class="cabecera">Datos Laborales</td>
+      </tr>
+            <tr>
+        <td class="categoria">RIF:</td>
+        <td class="dato" colspan="3">
+         <input name="riflab" type ="text" id="riflab" onblur="javascript:this.value=this.value.toUpperCase()" value="<?php if($ban==1)  echo $listarBeneficiario[$i+42];?>" size="12" maxlength="10" />
+        </td>
+      </tr>
+      <tr>
+        <td class="categoria">Descripción:</td>
+        <td class="dato" colspan="3">
+         <textarea name="deslab" cols="60" rows="2" id="deslab"  onblur="javascript:this.value=this.value.toUpperCase()" ><?php if($ban==1)  echo $listarBeneficiario[$i+43];?> </textarea>
+        </td>
+      </tr>
 
   <tr>
-        <td colspan="4" class="cabecera">Datos de la Transferencia del Beneficiario</td>
+        <td colspan="4" class="cabecera">Direcci&oacute;n</td>
       </tr>
-    <tr>
-        <td class="categoria">*Numero de Cuenta Beneficiario:</td>
+      <tr>
+        <td class="categoria">Calle/avenida:</td>
         <td class="dato">
-         <input name="calle" type ="text" id="calle" onkeypress="return acessoNumerico(event)" value="<?php if($ban==1)  echo $listarBeneficiario[$i+7];?>" size="20" maxlength="20" />
+         <input name="calle" type ="text" id="calle" onblur="javascript:this.value=this.value.toUpperCase()" value="<?php if($ban==1)  echo $listarBeneficiario[$i+7];?>" size="30" maxlength="30" />
         </td>
-        <td class="categoria">*Nombre y Apellido/ Raz&oacute;n Social Beneficiario:</td>
+        <td class="categoria">Urb. o Barrio:</td>
         <td class="dato">
          <input name="urb" type ="text" id="urb" onblur="javascript:this.value=this.value.toUpperCase()" value="<?php if($ban==1)  echo $listarBeneficiario[$i+8];?>" size="30" maxlength="30" />
         </td>
       </tr>
       <tr>
-        <td class="categoria">*RIF / CI:</td>
+        <td class="categoria">Edificio/casa/quinta:</td>
         <td class="dato" >
-
-          <input name="casa" type ="text" id="casa" value="<?php if($ban==1)  echo $listarBeneficiario[$i+9];?>"  onblur="javascript:this.value=this.value.toUpperCase()" size="10" maxlength="10" />
+          <input name="casa" type ="text" id="casa" value="<?php if($ban==1)  echo $listarBeneficiario[$i+9];?>"  onblur="javascript:this.value=this.value.toUpperCase()" size="30" maxlength="30" />
        </td>
-        <td class="categoria">*Tipo de Cuenta:</td>
+        <td class="categoria">N&uacute;mero de piso:</td>
         <td class="dato" >
-             <select name="piso" size="1" id="piso">
-    <?php if($ban==1)  echo " <option value=".$listarBeneficiario[$i+10].">".$listarBeneficiario[$i+10]."</option>";?>
-          <option value="Cuenta Corriente">Cuenta Corriente</option>
-          <option value="Cuenta de Ahorros">Cuenta de Ahorros</option>
-          <option value="Cuenta de Nomina">Cuenta de Nomina</option>
-
-
-          </select>
-          
+          <input name="piso" type ="text" id="piso" onkeypress="return acessoNumerico(event)" value="<?php if($ban==1)  echo $listarBeneficiario[$i+10];?>" size="30" maxlength="6" />
        </td>
       </tr>
         <tr>
-        <td class="categoria">*Tipo de Transferencia:</td>
+        <td class="categoria">N° de Apartamento:</td>
         <td class="dato" >
-             <select name="apart" size="1" id="apart">
-    <?php if($ban==1)  echo " <option value=".$listarBeneficiario[$i+11].">".$listarBeneficiario[$i+11]."</option>";?>
-          <option value="Cliente">Cliente</option>
-          <option value="No Cliente">No Cliente</option>
-          <option value="Empleado">Empleado</option>
-
-
-          </select>
-          
-
+          <input name="apart" type ="text" id="apart" onblur="javascript:this.value=this.value.toUpperCase()" value="<?php if($ban==1)  echo $listarBeneficiario[$i+11];?>" size="30" maxlength="4" />
       </tr>
       <TR>
-    <TD width="175" class="categoria"><strong>*Banco:<?php echo $listarBeneficiario[$i+38];?></strong></TD>
+    <TD width="175" class="categoria"><strong>Estado:<?php echo $listarBeneficiario[$i+38];?></strong></TD>
     <TD colspan="3" class="categoria"><div align="left"><span class="dato">
      <select id="pais" name="pais">
             <option value="<?php echo $listarBeneficiario[$i+36]; ?>"><?php echo $buscarEstados[1]; ?></option>
-      
+            <option value="0">Selecciona Uno...</option>
         </select>
-    </span> </div></TD>   
+    </span> </div></TD>
 
   </TR>
-    
-   <TR>
-    <TD width="175" class="categoria"><strong>*Estatus de la Transferencia:</strong></TD>
+    <TR>
+    <TD width="175" class="categoria"><strong>Municipio:</strong></TD>
     <TD colspan="3" class="categoria"><div align="left"><span class="dato">
         <select id="estado" name="estado">
             <option value="<?php echo $listarBeneficiario[$i+37]; ?>"><?php echo $buscarMunicipio[1]; ?></option>
@@ -689,7 +714,7 @@ if (document.form1.obspro.value.length<15){
     </span></div></TD>
   </TR>
     <TR>
-    <TD width="175" class="categoria"><strong>*Sucursal:</strong></TD>
+    <TD width="175" class="categoria"><strong>Parroquia:</strong></TD>
     <TD colspan="3" class="categoria"><div align="left"><span class="dato">
         <select id="ciudad" name="ciudad">
             <option value="<?php echo $listarBeneficiario[$i+38]; ?>"><?php echo $buscarParroquia[1]; ?></option>
@@ -697,25 +722,80 @@ if (document.form1.obspro.value.length<15){
         </select>
     </span></div></TD>
   </TR>
-      <t
-
       <tr>
-        <td class="categoria">* Monto:</td>
+        <td class="categoria"> Tlf/Celular 1:</td>
         <td class="dato" >
-      
-          <input name="tlf1" type ="text" id="tlf1" onkeypress="return acessoNumerico(event)" value="<?php if($ban==1)  echo $listarBeneficiario[$i+22].$listarBeneficiario[$i+23];?>" size="20" maxlength="20" />
+          <input name="codtlf1" type="text" id="codtlf1" onkeypress="return acessoNumerico(event)" value="<?php if($ban==1)  echo $listarBeneficiario[$i+22];?>" size="6" maxlength="4" />
+          <input name="tlf1" type ="text" id="tlf1" onkeypress="return acessoNumerico(event)" value="<?php if($ban==1)  echo $listarBeneficiario[$i+23];?>" size="15" maxlength="7" />
        </td>
-        <tr>
-        <td class="categoria">*Nro Doc:</td>
-        <td class="dato">
-         <input name="obspro" type ="text" id="obspro" onkeypress="return acessoNumerico(event)" value="<?php if($ban==1)  echo $listarBeneficiario[$i+16];?>" size="20" maxlength="20" />
-        
-       </td>
-      </tr>
-        <td class="categoria">Tlf/celular:</td>
+        <td class="categoria">Tlf/celular 2:</td>
         <td class="dato" >
           <input name="codtlf2" type="text" id="codtlf2"  onkeypress="return acessoNumerico(event)" value="<?php if($ban==1 )  echo $listarBeneficiario[$i+24];?>" size="6" maxlength="4" />
           <input name="tlf2" type ="text" id="tlf2" onkeypress="return acessoNumerico(event)" value="<?php if($ban==1)  echo $listarBeneficiario[$i+25];?>" size="15" maxlength="7" />
+       </td>
+      </tr>
+        <tr>
+        <td colspan="4" class="cabecera">Tipo de Beneficiario</td>
+      </tr>
+        <tr>
+        <td class="categoria">
+             <label>Discapacidad</label>
+        </td>
+        <td class="dato" >
+        <input type="radio" name="tipo" id="tipo" value="1" <?php if($ban==1 and  $listarBeneficiario[$i+35]==1)  echo "checked= 'true'"; ?> />
+       </td>
+       <td class="categoria">
+             <label>Victima de Estafa</label>
+        </td>
+        <td class="dato" >
+        <input type="radio" name="tipo" id="tipo"  value="2" <?php if($ban==1 and  $listarBeneficiario[$i+35]==2)  echo "checked= 'true'"; ?> />
+       </td>
+      </tr>
+              <tr>
+        <td class="categoria">
+             <label>Medicos y Enfermeras</label>
+        </td>
+        <td class="dato" >
+        <input type="radio" name="tipo" id="tipo"  value="3" <?php if($ban==1 and  $listarBeneficiario[$i+35]==3)  echo "checked= 'true'"; ?> />
+       </td>
+       <td class="categoria">
+             <label>Educadores</label>
+        </td>
+        <td class="dato" >
+        <input type="radio" name="tipo" id="tipo"  value="4" <?php if($ban==1 and  $listarBeneficiario[$i+35]==4)  echo "checked= 'true'"; ?> />
+       </td>
+      </tr>
+              <tr>
+        <td class="categoria">
+             <label>Personal Militar</label>
+        </td>
+        <td class="dato" >
+        <input type="radio" name="tipo" id="tipo"  value="5" <?php if($ban==1 and  $listarBeneficiario[$i+35]==5)  echo "checked= 'true'"; ?> />
+       </td>
+       <td class="categoria">
+             <label>Funcionarios publicos</label>
+        </td>
+        <td class="dato" >
+        <input type="radio" name="tipo" id="tipo"  value="6" <?php if($ban==1 and  $listarBeneficiario[$i+35]==6)  echo "checked= 'true'"; ?> />
+       </td>
+      </tr>
+       <tr>
+        <td class="categoria">
+             <label>Otros</label>
+        </td>
+        <td class="dato" >
+        <input type="radio" name="tipo" id="tipo"  value="7" <?php if($ban==1 and  $listarBeneficiario[$i+35]==7)  echo "checked= 'true'"; ?> />
+       </td>
+       <td class="categoria">
+        <label></label>
+        </td>
+        <td class="dato" >
+       </td>
+      </tr>
+       <tr>
+        <td class="categoria">Observaciones:</td>
+        <td class="dato" colspan='3'>
+          <textarea name="obspro" cols="60" rows="2" id="obspro"  onblur="javascript:this.value=this.value.toUpperCase()" ><?php if($ban==1)  echo $listarBeneficiario[$i+16];?> </textarea>
        </td>
       </tr>
        <tr>
@@ -730,9 +810,10 @@ if (document.form1.obspro.value.length<15){
            <?php if (!$listarBeneficiario[$i]) { ?>
             <input name="agregar" type="button" id="agregar" onclick="validarCaract(1); return false" value="Agregar" />
             <?php } if ($listarBeneficiario[$i]) { ?>
-         
+            <INPUT type="button" id="regDoc" value="Reg. Documentos" onclick="popup('regDocumentos.php?ci=<?php echo $listarBeneficiario[$i]; ?>&tip=<?php echo $listarBeneficiario[$i+35]; ?>')">
+            <input name="Modificar" type="button" id="Modificar" onclick="validarCaract('2'); return false" value="Modificar" />
             <?php } ?>
-            <input name="listar" type="button" id="listar" onclick="window.location.href='listado_beneficiariosExp.php'" value="Listar" />
+            <input name="listar" type="button" id="listar" onclick="window.location.href='listado_beneficiarios.php'" value="Listar" />
          </div>
      </tr>
  </table>

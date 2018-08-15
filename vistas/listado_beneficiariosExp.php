@@ -227,7 +227,7 @@ function exel(URL) {
               <td class="cabecera" width="5%">Montos</td>
               <td class="cabecera">Observaciones</td>
               <td class="cabecera">Fecha Registro</td>
-                <td class="cabecera">Nro Doc/Referencia</td>
+                <td class="cabecera">Nro Referencia BCV</td>
                 <td class="cabecera">Usuario</td>
                 <td class="cabecera">Tipo Orden.</td>
                 <? if ($_SESSION['tipoUsuario']<>'18'){?>

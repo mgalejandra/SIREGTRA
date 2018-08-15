@@ -23,7 +23,8 @@ class beneficiario extends conexion{
            (
 			'".$data[0]."','".$data[1]."','".$data[2]."','".$data[3]."','".$data[4]."','".$data[5]."','".$data[6]."',
 			'".$data[7]."','".$data[8]."','".$data[9]."','".$data[10]."','".$data[11]."','".$data[12]."',
-			'".$data[13]."','".$data[14]."','".$data[15]."','MA','".$fecha."','".$data[16]."','".$data[17]."','".$data[18]."',".$data[19].",'".$data[20]."','".$data[21]."','".$data[22]."','".$data[23]."','".$_SESSION['usuario']."','".$data[24]."','".$data[25]."','".$data[26]."'
+			'".$data[13]."','".$data[14]."','".$data[15]."','MA','".$fecha."','".$data[16]."','".$data[17]."','".$data[18]."',".$data[19].",'".$data[20]."','".$data[21]."','".$data[22]."','".$data[23]."',
+      '".$_SESSION['usuario']."','".$data[24]."','".$data[25]."','".$data[26]."'
            )";
 //print '<pre>'; print $sql;
   $conexion = $this->conectar();
@@ -55,11 +56,11 @@ function contarBeneficiarios($codpro,$nomcomp,$banco,$des_fechareg,$has_fechareg
 
  function listarBeneficiario($codpro=null,$nomcomp=null,$banco=null,$des_fechareg=null,$has_fechareg=null,$lim=null,$riflab=null){
 
-    $sql = "select
+    $sql = "select 
 			  codpro, prinompro , segnompro, priapepro ,segapepro, nomorgpro ,  nomcomp ,
 			  calavepro , urbbarpro,  edicaspro ,numpispro , numapapro ,dismunpro ,
 			  ciudadpro , tlfcelpro ,tlfcel2pro , obspro ,tipmovpro, to_char(fecha_reg,'dd/mm/yyyy'),  substr(codpro,1,1) as nac,
-			  substr(codpro,2,8) as nac, substr(codpro,10,1) as nac,
+			  substr(codpro,2,9) as nac, substr(codpro,12,10) as nac,
 			  substr(tlfcelpro,1,4) as cod,substr(tlfcelpro,5,7) as num ,substr(tlfcel2pro,1,4) as cod2,substr(tlfcel2pro,5,7) as num2,
               calavepro,urbbarpro,edicaspro,numpispro,numapapro,dismunpro,ciudadpro, sexo,(case sexo when 'A' THEN 'AHORROS' when 'C' THEN 'CORRIENTE' end) as destipo, tipo, codest, codmun, codpar,to_char(fecnac,'dd/mm/yyyy'),id_banco,correo ";
     if ($riflab){
@@ -73,14 +74,14 @@ function contarBeneficiarios($codpro,$nomcomp,$banco,$des_fechareg,$has_fechareg
    if($codpro)  $sql=$sql." and codpro like '%".$codpro."%'";
    if($nomcomp)  $sql=$sql." and nomcomp like '%".$nomcomp."%'";
    if($banco)  $sql=$sql." and id_banco like '%".$banco."%'";
-   if($des_fechareg and $has_fechareg){
+       if($des_fechareg and $has_fechareg){
        $sql = $sql." and fecha_reg BETWEEN '".$des_fechareg."' AND '".$has_fechareg."'";
     }
    if ($lim=='1')
     $sql=$sql." LIMIT 1";
    else
-    $sql=$sql." order by codpro";
-  //print '<pre>'; print $sql;
+    $sql=$sql." order by codpro, edicaspro desc, id_pro desc ,id_pro desc";
+ // print '<pre>'; print $sql;
   $conexion = $this->conectar();
   $consulta = $this->consultar($conexion,$sql);
   $consulta = $this->ret_vector($consulta);
@@ -106,7 +107,7 @@ function contarBeneficiarios($codpro,$nomcomp,$banco,$des_fechareg,$has_fechareg
 			  propietarios.status='A' and propietarios.id_banco=banco.id_banco
 			  and	propietarios.id_banco<>'' AND propietarios.id_banco<>'1'";
    if($codpro)  $sql=$sql." and codpro like '%".$codpro."%'";
-   if($nomcomp)  $sql=$sql." and nomcomp like '%".$nomcomp."%'";
+   if($id_pro)  $sql=$sql." and nomcomp like '%".$nomcomp."%'";
    if($banco)  $sql=$sql." and propietarios.id_banco like '%".$banco."%'";
    if($des_fechareg and $has_fechareg){
        $sql = $sql." and fecha_reg BETWEEN '".$des_fechareg."' AND '".$has_fechareg."'";
@@ -145,8 +146,8 @@ function contarBeneficiarios($codpro,$nomcomp,$banco,$des_fechareg,$has_fechareg
     $sql = "select
 			  codpro, prinompro , segnompro, priapepro ,segapepro, nomorgpro ,  nomcomp ,
 			  calavepro , urbbarpro,  edicaspro ,numpispro , numapapro ,dismunpro ,
-			  ciudadpro , tlfcelpro ,tlfcel2pro , obspro ,tipmovpro, to_char(fecha_reg,'dd/mm/yyyy'),  substr(codpro,1,1) as nac,
-			  substr(codpro,2,8) as nac, substr(codpro,10,1) as nac,
+			  ciudadpro , tlfcelpro ,tlfcel2pro , obspro ,tipmovpro, to_char(fecha_reg,'dd/mm/yyyy'),   substr(codpro,1,1) as nac,
+        substr(codpro,2,9) as nac, substr(codpro,12,10) as nac,
 			  substr(tlfcelpro,1,4) as cod,substr(tlfcelpro,5,7) as num ,substr(tlfcel2pro,1,4) as cod2,substr(tlfcel2pro,5,7) as num2,
               calavepro,urbbarpro,edicaspro,numpispro,numapapro,dismunpro,ciudadpro, sexo, (case sexo when 'A' THEN 'AHORROS' when 'C' THEN 'CORRIENTE' end) as destipo, " .
               		"propietarios.tipo, codest, codmun, codpar,to_char(fecnac,'dd/mm/yyyy'),propietarios.id_banco,desbanco(propietarios.id_banco),
@@ -174,7 +175,7 @@ else if ($des_fechareg and $has_fechareg)	$sql.= " and fecha_reg BETWEEN '".$des
 
     //$sql=$sql." order by codpro";
 
-     $sql=$sql." order by id_pro desc, codpro";
+     $sql=$sql." order by codpro";
 
     if($offset>=0) $sql = $sql." LIMIT 15 OFFSET ".$offset;
   //print '<pre>'; print $sql;
@@ -218,7 +219,7 @@ else if ($des_fechareg and $has_fechareg)	$sql.= " and fecha_reg BETWEEN '".$des
   return $consulta[0];
  }
 
- function modificarBeneficiario($codpro,$data){
+ function modificarBeneficiario($edicaspro,$data){
   $fecha=date('d/m/Y');
   $conexion = $this->conectar();
   //si el dato que estoy cambiando es el rif, actualizo la tabla de asignacion
@@ -274,7 +275,7 @@ else if ($des_fechareg and $has_fechareg)	$sql.= " and fecha_reg BETWEEN '".$des
   	  $sql .= "  tipo='".$data[19]."',sexo='".$data[20]."',ced='".$data[22]."',correo='".$data[24]."', riflab='".$data[25]."',deslab='".$data[26]."' ";
       $sql .= " where correo='".$data[24]."' and edicaspro='".$data[9]."'
       and fecnac='".$data[21]."' and numpispro='".$data[10]."' and urbbarpro='".$data[8]."'";
-  //print '<pre>'; print $sql;
+  print '<pre>'; print $sql;
 
   $consulta = $this->consultar($conexion,$sql);
   $this->desconectar($conexion);
